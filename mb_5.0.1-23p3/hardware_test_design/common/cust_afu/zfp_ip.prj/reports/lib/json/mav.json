@@ -1,0 +1,780 @@
+{
+  "nodes":
+  [
+    {
+      "type":"component"
+      , "id":2
+      , "name":"zfp_1d_decompress"
+      , "children":
+      [
+        {
+          "type":"bb"
+          , "id":3
+          , "name":"zfp_1d_decompress.B0.runOnce"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Latency":"2"
+            }
+          ]
+        }
+        , {
+          "type":"bb"
+          , "id":4
+          , "name":"zfp_1d_decompress.B1.start"
+          , "children":
+          [
+            {
+              "type":"inst"
+              , "id":13
+              , "name":"Stream Read"
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                    , "line":230
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"table"
+                  , "Width":"1 bit"
+                  , "Depth":"0"
+                  , "Stall-free":"No"
+                  , "Start Cycle":"6"
+                  , "Latency":"0"
+                  , "Reference":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Reference Manual"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/ewa1462824960255.html"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"inst"
+              , "id":22
+              , "name":"Loop Input"
+              , "debug":
+              [
+                [
+                  {
+                    "filename":""
+                    , "line":0
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"table"
+                  , "Start Cycle":"0"
+                  , "Latency":"1"
+                  , "Loops To":"31"
+                }
+              ]
+            }
+            , {
+              "type":"inst"
+              , "id":23
+              , "name":"End"
+              , "details":
+              [
+                {
+                  "type":"table"
+                  , "Start Cycle":"6"
+                  , "Latency":"1"
+                }
+              ]
+            }
+          ]
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Latency":"6"
+              , "II":"1"
+              , "Subloops":"Yes"
+              , "Pipelined":"Yes"
+              , "Fmax Bottlenecks":"No"
+              , "Loop Info":"Entry to loop. "
+            }
+          ]
+        }
+        , {
+          "type":"bb"
+          , "id":5
+          , "name":"zfp_1d_decompress.B2"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Latency":"5"
+            }
+          ]
+        }
+        , {
+          "type":"bb"
+          , "id":6
+          , "name":"zfp_1d_decompress.B3"
+          , "children":
+          [
+            {
+              "type":"inst"
+              , "id":15
+              , "name":"Stream Read"
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                    , "line":24
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"table"
+                  , "Width":"64 bits"
+                  , "Depth":"0"
+                  , "Stall-free":"No"
+                  , "Start Cycle":"11"
+                  , "Latency":"0"
+                  , "Reference":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Reference Manual"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/ewa1462824960255.html"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"inst"
+              , "id":24
+              , "name":"Loop Input"
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                    , "line":138
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"table"
+                  , "Start Cycle":"0"
+                  , "Latency":"1"
+                  , "Loops To":"8"
+                }
+              ]
+            }
+            , {
+              "type":"inst"
+              , "id":25
+              , "name":"End"
+              , "details":
+              [
+                {
+                  "type":"table"
+                  , "Start Cycle":"17"
+                  , "Latency":"1"
+                }
+              ]
+            }
+          ]
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Latency":"17"
+              , "II":"1"
+              , "Subloops":"Yes"
+              , "Pipelined":"Yes"
+              , "Fmax Bottlenecks":"No"
+              , "Loop Info":"Entry to loop. "
+            }
+          ]
+        }
+        , {
+          "type":"bb"
+          , "id":7
+          , "name":"zfp_1d_decompress.B4"
+          , "children":
+          [
+            {
+              "type":"inst"
+              , "id":17
+              , "name":"Stream Read"
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                    , "line":24
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"table"
+                  , "Width":"64 bits"
+                  , "Depth":"0"
+                  , "Stall-free":"No"
+                  , "Start Cycle":"7"
+                  , "Latency":"0"
+                  , "Reference":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Reference Manual"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/ewa1462824960255.html"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"inst"
+              , "id":26
+              , "name":"Loop Input"
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                    , "line":207
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"table"
+                  , "Start Cycle":"0"
+                  , "Latency":"1"
+                  , "Loops To":"27"
+                }
+              ]
+            }
+            , {
+              "type":"inst"
+              , "id":27
+              , "name":"Loop End"
+              , "details":
+              [
+                {
+                  "type":"table"
+                  , "Start Cycle":"14"
+                  , "Latency":"1"
+                }
+              ]
+            }
+          ]
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Latency":"14"
+              , "II":"2"
+              , "Subloops":"No"
+              , "Pipelined":"Yes"
+              , "Fmax Bottlenecks":"No"
+              , "Loop Info":"Loop is pipelined with II of 2. See Loops Analysis for more information."
+            }
+          ]
+        }
+        , {
+          "type":"bb"
+          , "id":8
+          , "name":"zfp_1d_decompress.B5"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Latency":"5"
+              , "II":"1"
+              , "Subloops":"Yes"
+              , "Pipelined":"Yes"
+              , "Fmax Bottlenecks":"No"
+              , "Loop Info":"Exit which branches back to loop. "
+            }
+          ]
+        }
+        , {
+          "type":"bb"
+          , "id":9
+          , "name":"zfp_1d_decompress.B6"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Latency":"10"
+              , "II":"1"
+              , "Subloops":"No"
+              , "Pipelined":"Yes"
+              , "Fmax Bottlenecks":"No"
+              , "Loop Info":""
+              , "Loops To":"9"
+            }
+          ]
+        }
+        , {
+          "type":"bb"
+          , "id":10
+          , "name":"zfp_1d_decompress.B7"
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Latency":"10"
+            }
+          ]
+        }
+        , {
+          "type":"bb"
+          , "id":11
+          , "name":"zfp_1d_decompress.B8"
+          , "children":
+          [
+            {
+              "type":"inst"
+              , "id":18
+              , "name":"Stream Write"
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                    , "line":257
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"table"
+                  , "Width":"64 bits"
+                  , "Depth":"0"
+                  , "Stall-free":"No"
+                  , "Start Cycle":"19"
+                  , "Latency":"0"
+                  , "Reference":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Reference Manual"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/ewa1462824960255.html"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"inst"
+              , "id":28
+              , "name":"Loop Input"
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                    , "line":252
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"table"
+                  , "Start Cycle":"0"
+                  , "Latency":"1"
+                  , "Loops To":"29"
+                }
+              ]
+            }
+            , {
+              "type":"inst"
+              , "id":29
+              , "name":"Loop End"
+              , "details":
+              [
+                {
+                  "type":"table"
+                  , "Start Cycle":"19"
+                  , "Latency":"1"
+                }
+              ]
+            }
+          ]
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Latency":"19"
+              , "II":"1"
+              , "Subloops":"No"
+              , "Pipelined":"Yes"
+              , "Fmax Bottlenecks":"No"
+              , "Loop Info":""
+            }
+          ]
+        }
+        , {
+          "type":"bb"
+          , "id":12
+          , "name":"zfp_1d_decompress.B9"
+          , "children":
+          [
+            {
+              "type":"inst"
+              , "id":20
+              , "name":"Stream Write"
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                    , "line":259
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"table"
+                  , "Width":"1 bit"
+                  , "Depth":"0"
+                  , "Stall-free":"No"
+                  , "Start Cycle":"0"
+                  , "Latency":"0"
+                  , "Reference":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Reference Manual"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/ewa1462824960255.html"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"inst"
+              , "id":30
+              , "name":"Begin"
+              , "details":
+              [
+                {
+                  "type":"table"
+                  , "Start Cycle":"0"
+                  , "Latency":"1"
+                }
+              ]
+            }
+            , {
+              "type":"inst"
+              , "id":31
+              , "name":"Loop End"
+              , "details":
+              [
+                {
+                  "type":"table"
+                  , "Start Cycle":"0"
+                  , "Latency":"1"
+                }
+              ]
+            }
+          ]
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Latency":"0"
+              , "II":"1"
+              , "Subloops":"Yes"
+              , "Pipelined":"Yes"
+              , "Fmax Bottlenecks":"No"
+              , "Loop Info":"Exit which branches back to loop. "
+            }
+          ]
+        }
+      ]
+    }
+    , {
+      "type":"stream"
+      , "id":14
+      , "name":"call.zfp_1d_decompress"
+      , "debug":
+      [
+        [
+          {
+            "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+            , "line":230
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Width":"1 bit"
+          , "Depth":"0"
+          , "Bits per symbol":"1 bit"
+          , "Uses Packets":"No"
+          , "Uses Empty":"No"
+          , "First symbol in high order bits":"No"
+          , "Uses Valid":"Yes"
+          , "Ready Latency":"0"
+        }
+      ]
+    }
+    , {
+      "type":"stream"
+      , "id":16
+      , "name":"in_stream"
+      , "debug":
+      [
+        [
+          {
+            "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+            , "line":230
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Width":"64 bits"
+          , "Depth":"0"
+          , "Bits per symbol":"64 bits"
+          , "Uses Packets":"No"
+          , "Uses Empty":"No"
+          , "First symbol in high order bits":"No"
+          , "Uses Valid":"Yes"
+          , "Ready Latency":"0"
+        }
+      ]
+    }
+    , {
+      "type":"stream"
+      , "id":19
+      , "name":"out_stream"
+      , "debug":
+      [
+        [
+          {
+            "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+            , "line":230
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Width":"64 bits"
+          , "Depth":"0"
+          , "Bits per symbol":"64 bits"
+          , "Uses Packets":"No"
+          , "Uses Empty":"No"
+          , "First symbol in high order bits":"No"
+          , "Uses Ready":"Yes"
+          , "Ready Latency":"0"
+        }
+      ]
+    }
+    , {
+      "type":"stream"
+      , "id":21
+      , "name":"return.zfp_1d_decompress"
+      , "debug":
+      [
+        [
+          {
+            "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+            , "line":230
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Width":"1 bit"
+          , "Depth":"0"
+          , "Bits per symbol":"1 bit"
+          , "Uses Packets":"No"
+          , "Uses Empty":"No"
+          , "First symbol in high order bits":"No"
+          , "Uses Ready":"Yes"
+          , "Ready Latency":"0"
+        }
+      ]
+    }
+  ]
+  , "links":
+  [
+    {
+      "from":14
+      , "to":13
+    }
+    , {
+      "from":16
+      , "to":15
+    }
+    , {
+      "from":16
+      , "to":17
+    }
+    , {
+      "from":18
+      , "to":19
+    }
+    , {
+      "from":20
+      , "to":21
+    }
+    , {
+      "from":31
+      , "to":22
+    }
+    , {
+      "from":3
+      , "to":22
+    }
+    , {
+      "from":13
+      , "to":23
+    }
+    , {
+      "from":8
+      , "to":5
+    }
+    , {
+      "from":8
+      , "to":24
+    }
+    , {
+      "from":23
+      , "to":24
+    }
+    , {
+      "from":15
+      , "to":25
+    }
+    , {
+      "from":27
+      , "to":26
+    }
+    , {
+      "from":25
+      , "to":26
+    }
+    , {
+      "from":17
+      , "to":27
+    }
+    , {
+      "from":27
+      , "to":8
+    }
+    , {
+      "from":9
+      , "to":9
+    }
+    , {
+      "from":5
+      , "to":9
+    }
+    , {
+      "from":9
+      , "to":10
+    }
+    , {
+      "from":29
+      , "to":28
+    }
+    , {
+      "from":10
+      , "to":28
+    }
+    , {
+      "from":18
+      , "to":29
+    }
+    , {
+      "from":29
+      , "to":30
+    }
+    , {
+      "from":20
+      , "to":31
+    }
+    , {
+      "from":22
+      , "to":13
+    }
+    , {
+      "from":24
+      , "to":15
+    }
+    , {
+      "from":26
+      , "to":17
+    }
+    , {
+      "from":28
+      , "to":18
+    }
+    , {
+      "from":30
+      , "to":20
+    }
+  ]
+}

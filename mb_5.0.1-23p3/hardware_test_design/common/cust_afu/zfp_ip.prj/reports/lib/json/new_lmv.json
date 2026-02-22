@@ -1,0 +1,94 @@
+{
+  "nodes":
+  [
+    {
+      "name":"zfp_1d_decompress"
+      , "id":20492728
+      , "type":"component"
+      , "children":
+      [
+        {
+          "name":"Local Memory"
+          , "id":1
+          , "type":"memtype"
+          , "children":
+          [
+            {
+              "name":"block"
+              , "id":2
+              , "details":
+              [
+                {
+                  "type":"table"
+                  , "Declared at":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"%L"
+                      , "links":
+                      [
+                        {
+                          "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                          , "line":"242"
+                        }
+                      ]
+                    }
+                  ]
+                  , "Additional information":"This variable is carried through the pipeline in registers (rather than being stored in RAM)"
+                }
+              ]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                    , "line":242
+                  }
+                ]
+              ]
+              , "type":"reg"
+            }
+            , {
+              "name":"ublock"
+              , "id":3
+              , "details":
+              [
+                {
+                  "type":"table"
+                  , "Declared at":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"%L"
+                      , "links":
+                      [
+                        {
+                          "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                          , "line":"71"
+                        }
+                      ]
+                    }
+                  ]
+                  , "Additional information":"This variable is carried through the pipeline in registers (rather than being stored in RAM)"
+                }
+              ]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                    , "line":71
+                  }
+                ]
+              ]
+              , "type":"reg"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  , "links":
+  [
+  ]
+}

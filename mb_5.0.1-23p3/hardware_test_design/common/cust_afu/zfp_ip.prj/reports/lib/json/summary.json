@@ -1,0 +1,103 @@
+{
+  "performanceSummary":
+  {
+    "name":"Function Summary"
+    , "columns":
+    ["Function Name", "Hyper-Optimized Handshaking"]
+    , "children":
+    [
+      {
+        "name":"zfp_1d_decompress"
+        , "data":
+        [
+          "Off"
+        ]
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Hyper-optimized handshaking disabled due to loop orchestration compiler optimization being disabled in loop zfp_1d_decompress.B1.start."
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+              , "line":230
+            }
+          ]
+        ]
+      }
+    ]
+  }
+  , "functionNameMapping":
+  {
+    "name":"Synthesized Function Name Mapping"
+    , "columns":
+    ["User-defined Function Name", "Mapped Function Name"]
+    , "children":
+    [
+      {
+        "name":"zfp_1d_decompress(ihc::stream_in<unsigned long>&, ihc::stream_out<double>&)"
+        , "data":
+        ["zfp_1d_decompress"]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+              , "line":230
+            }
+          ]
+        ]
+      }
+    ]
+  }
+  , "estimatedResources":
+  {
+    "name":"Estimated Resource Usage"
+    , "columns":
+    ["Function Name", "ALUTs ", "FFs  ", "RAMs ", "DSPs ", "MLABs"]
+    , "children":
+    [
+      {
+        "name":"zfp_1d_decompress"
+        , "data":
+        [5562, 13346, 0, 0, 96]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+              , "line":230
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"Total"
+        , "classes":
+        ["summary-highlight", "nohover"]
+        , "data":
+        [5562, 13346, 0, 0, 96]
+        , "data_percent":
+        [0.570813, 0.684832, 0, 0]
+      }
+      , {
+        "name":"Available"
+        , "classes":
+        ["summary-highlight", "nohover"]
+        , "data":
+        [974400, 1948800, 7110, 4510, 0]
+      }
+    ]
+  }
+  , "compileWarnings":
+  {
+    "name":"Compile Warnings"
+    , "children":
+    [
+    ]
+  }
+}

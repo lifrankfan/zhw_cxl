@@ -1,0 +1,267 @@
+00:00.0 System peripheral [0880]: Intel Corporation Ice Lake Memory Map/VT-d [8086:09a2] (rev 20)
+00:00.1 System peripheral [0880]: Intel Corporation Ice Lake Mesh 2 PCIe [8086:09a4] (rev 20)
+00:00.2 System peripheral [0880]: Intel Corporation Ice Lake RAS [8086:09a3] (rev 20)
+00:00.4 Generic system peripheral [0807]: Intel Corporation Device [8086:0b23]
+00:08.0 PCI bridge [0604]: Intel Corporation Device [8086:1bb8] (rev 11)
+00:0a.0 PCI bridge [0604]: Intel Corporation Device [8086:1bba] (rev 11)
+00:0f.0 PCI bridge [0604]: Intel Corporation Device [8086:1bbf] (rev 11)
+00:10.0 PCI bridge [0604]: Intel Corporation Device [8086:1bb0] (rev 11)
+00:14.0 USB controller [0c03]: Intel Corporation Emmitsburg (C740 Family) USB 3.2 Gen 1 xHCI Controller [8086:1bcd] (rev 11)
+00:14.2 RAM memory [0500]: Intel Corporation Device [8086:1bce] (rev 11)
+00:14.4 Host bridge [0600]: Intel Corporation Device [8086:1bfe] (rev 11)
+00:15.0 System peripheral [0880]: Intel Corporation Device [8086:1bff] (rev 11)
+00:16.0 Communication controller [0780]: Intel Corporation Device [8086:1be0] (rev 11)
+00:16.1 Communication controller [0780]: Intel Corporation Device [8086:1be1] (rev 11)
+00:16.4 Communication controller [0780]: Intel Corporation Device [8086:1be4] (rev 11)
+00:17.0 SATA controller [0106]: Intel Corporation Device [8086:1ba2] (rev 11)
+00:1a.0 PCI bridge [0604]: Intel Corporation Device [8086:1bb4] (rev 11)
+00:1f.0 ISA bridge [0601]: Intel Corporation Device [8086:1b81] (rev 11)
+00:1f.4 SMBus [0c05]: Intel Corporation Device [8086:1bc9] (rev 11)
+00:1f.5 Serial bus controller [0c80]: Intel Corporation Device [8086:1bca] (rev 11)
+03:00.0 PCI bridge [0604]: ASRock Incorporation Device [1849:1150] (rev 06)
+04:00.0 VGA compatible controller [0300]: ASPEED Technology, Inc. ASPEED Graphics Family [1a03:2000] (rev 52)
+05:00.0 Non-Volatile memory controller [0108]: Samsung Electronics Co Ltd NVMe SSD Controller S4LV008[Pascal] [144d:a80c]
+06:00.0 Ethernet controller [0200]: Intel Corporation Ethernet Controller X550 [8086:1563] (rev 01)
+06:00.1 Ethernet controller [0200]: Intel Corporation Ethernet Controller X550 [8086:1563] (rev 01)
+15:00.0 System peripheral [0880]: Intel Corporation Ice Lake Memory Map/VT-d [8086:09a2] (rev 20)
+15:00.1 System peripheral [0880]: Intel Corporation Ice Lake Mesh 2 PCIe [8086:09a4] (rev 20)
+15:00.2 System peripheral [0880]: Intel Corporation Ice Lake RAS [8086:09a3] (rev 20)
+15:00.4 Generic system peripheral [0807]: Intel Corporation Device [8086:0b23]
+3f:00.0 System peripheral [0880]: Intel Corporation Ice Lake Memory Map/VT-d [8086:09a2] (rev 20)
+3f:00.1 System peripheral [0880]: Intel Corporation Ice Lake Mesh 2 PCIe [8086:09a4] (rev 20)
+3f:00.2 System peripheral [0880]: Intel Corporation Ice Lake RAS [8086:09a3] (rev 20)
+3f:00.4 Generic system peripheral [0807]: Intel Corporation Device [8086:0b23]
+3f:01.0 PCI bridge [0604]: Intel Corporation Device [8086:352a] (rev 30)
+40:00.0 PCI bridge [0604]: Mellanox Technologies MT43244 Family [BlueField-3 SoC Emulated PCIe Bridge] [15b3:2024]
+41:00.0 PCI bridge [0604]: Mellanox Technologies MT43244 Family [BlueField-3 SoC Emulated PCIe Bridge] [15b3:2024]
+41:01.0 PCI bridge [0604]: Mellanox Technologies MT43244 Family [BlueField-3 SoC Emulated PCIe Bridge] [15b3:2024]
+41:02.0 PCI bridge [0604]: Mellanox Technologies MT43244 Family [BlueField-3 SoC Emulated PCIe Bridge] [15b3:2024]
+41:03.0 PCI bridge [0604]: Mellanox Technologies MT43244 Family [BlueField-3 SoC Emulated PCIe Bridge] [15b3:2024]
+41:04.0 PCI bridge [0604]: Mellanox Technologies MT43244 Family [BlueField-3 SoC Emulated PCIe Bridge] [15b3:2024]
+41:05.0 PCI bridge [0604]: Mellanox Technologies MT43244 Family [BlueField-3 SoC Emulated PCIe Bridge] [15b3:2024]
+41:06.0 PCI bridge [0604]: Mellanox Technologies MT43244 Family [BlueField-3 SoC Emulated PCIe Bridge] [15b3:2024]
+41:07.0 PCI bridge [0604]: Mellanox Technologies MT43244 Family [BlueField-3 SoC Emulated PCIe Bridge] [15b3:2024]
+41:08.0 PCI bridge [0604]: Mellanox Technologies MT43244 Family [BlueField-3 SoC Emulated PCIe Bridge] [15b3:2024]
+41:09.0 PCI bridge [0604]: Mellanox Technologies MT43244 Family [BlueField-3 SoC Emulated PCIe Bridge] [15b3:2024]
+41:0a.0 PCI bridge [0604]: Mellanox Technologies MT43244 Family [BlueField-3 SoC Emulated PCIe Bridge] [15b3:2024]
+41:0b.0 PCI bridge [0604]: Mellanox Technologies MT43244 Family [BlueField-3 SoC Emulated PCIe Bridge] [15b3:2024]
+41:0c.0 PCI bridge [0604]: Mellanox Technologies MT43244 Family [BlueField-3 SoC Emulated PCIe Bridge] [15b3:2024]
+41:0d.0 PCI bridge [0604]: Mellanox Technologies MT43244 Family [BlueField-3 SoC Emulated PCIe Bridge] [15b3:2024]
+41:0e.0 PCI bridge [0604]: Mellanox Technologies MT43244 Family [BlueField-3 SoC Emulated PCIe Bridge] [15b3:2024]
+41:0f.0 PCI bridge [0604]: Mellanox Technologies MT43244 Family [BlueField-3 SoC Emulated PCIe Bridge] [15b3:2024]
+42:00.0 Ethernet controller [0200]: Mellanox Technologies MT43244 BlueField-3 integrated ConnectX-7 network controller [15b3:a2dc] (rev 01)
+42:00.1 Ethernet controller [0200]: Mellanox Technologies MT43244 BlueField-3 integrated ConnectX-7 network controller [15b3:a2dc] (rev 01)
+42:00.2 DMA controller [0801]: Mellanox Technologies MT43244 BlueField-3 SoC Management Interface [15b3:c2d5] (rev 01)
+69:00.0 System peripheral [0880]: Intel Corporation Ice Lake Memory Map/VT-d [8086:09a2] (rev 20)
+69:00.1 System peripheral [0880]: Intel Corporation Ice Lake Mesh 2 PCIe [8086:09a4] (rev 20)
+69:00.2 System peripheral [0880]: Intel Corporation Ice Lake RAS [8086:09a3] (rev 20)
+69:00.4 Generic system peripheral [0807]: Intel Corporation Device [8086:0b23]
+93:00.0 System peripheral [0880]: Intel Corporation Ice Lake Memory Map/VT-d [8086:09a2] (rev 20)
+93:00.1 System peripheral [0880]: Intel Corporation Ice Lake Mesh 2 PCIe [8086:09a4] (rev 20)
+93:00.2 System peripheral [0880]: Intel Corporation Ice Lake RAS [8086:09a3] (rev 20)
+93:00.4 Generic system peripheral [0807]: Intel Corporation Device [8086:0b23]
+94:00.0 Processing accelerators [1200]: Intel Corporation Device [8086:0ddb] (rev 02)
+94:00.1 Processing accelerators [1200]: Intel Corporation Device [8086:0ddb] (rev 02)
+bd:00.0 System peripheral [0880]: Intel Corporation Ice Lake Memory Map/VT-d [8086:09a2] (rev 20)
+bd:00.1 System peripheral [0880]: Intel Corporation Ice Lake Mesh 2 PCIe [8086:09a4] (rev 20)
+bd:00.2 System peripheral [0880]: Intel Corporation Ice Lake RAS [8086:09a3] (rev 20)
+bd:00.4 Generic system peripheral [0807]: Intel Corporation Device [8086:0b23]
+bd:01.0 PCI bridge [0604]: Intel Corporation Device [8086:352a] (rev 30)
+bd:03.0 PCI bridge [0604]: Intel Corporation Device [8086:352b] (rev 30)
+bd:05.0 PCI bridge [0604]: Intel Corporation Device [8086:352c] (rev 30)
+bd:07.0 PCI bridge [0604]: Intel Corporation Device [8086:352d] (rev 30)
+e7:00.0 System peripheral [0880]: Intel Corporation Ice Lake Memory Map/VT-d [8086:09a2] (rev 20)
+e7:00.1 System peripheral [0880]: Intel Corporation Ice Lake Mesh 2 PCIe [8086:09a4] (rev 20)
+e7:00.2 System peripheral [0880]: Intel Corporation Ice Lake RAS [8086:09a3] (rev 20)
+e7:00.4 Generic system peripheral [0807]: Intel Corporation Device [8086:0b23]
+e7:01.0 System peripheral [0880]: Intel Corporation Device [8086:0b25]
+e7:02.0 System peripheral [0880]: Intel Corporation Device [8086:0cfe]
+e7:03.0 System peripheral [0880]: Intel Corporation Ice Lake MSM [8086:09a6]
+e7:03.1 System peripheral [0880]: Intel Corporation Ice Lake PMON MSM [8086:09a7]
+ec:00.0 System peripheral [0880]: Intel Corporation Ice Lake Memory Map/VT-d [8086:09a2] (rev 20)
+ec:00.1 System peripheral [0880]: Intel Corporation Ice Lake Mesh 2 PCIe [8086:09a4] (rev 20)
+ec:00.2 System peripheral [0880]: Intel Corporation Ice Lake RAS [8086:09a3] (rev 20)
+ec:00.4 Generic system peripheral [0807]: Intel Corporation Device [8086:0b23]
+ec:01.0 System peripheral [0880]: Intel Corporation Device [8086:0b25]
+ec:02.0 System peripheral [0880]: Intel Corporation Device [8086:0cfe]
+ed:00.0 Co-processor [0b40]: Intel Corporation 4xxx Series QAT [8086:4940] (rev 01)
+ef:00.0 Co-processor [0b40]: Intel Corporation Device [8086:2710]
+f1:00.0 System peripheral [0880]: Intel Corporation Ice Lake Memory Map/VT-d [8086:09a2] (rev 20)
+f1:00.1 System peripheral [0880]: Intel Corporation Ice Lake Mesh 2 PCIe [8086:09a4] (rev 20)
+f1:00.2 System peripheral [0880]: Intel Corporation Ice Lake RAS [8086:09a3] (rev 20)
+f1:00.4 Generic system peripheral [0807]: Intel Corporation Device [8086:0b23]
+f1:01.0 System peripheral [0880]: Intel Corporation Device [8086:0b25]
+f1:02.0 System peripheral [0880]: Intel Corporation Device [8086:0cfe]
+f6:00.0 System peripheral [0880]: Intel Corporation Ice Lake Memory Map/VT-d [8086:09a2] (rev 20)
+f6:00.1 System peripheral [0880]: Intel Corporation Ice Lake Mesh 2 PCIe [8086:09a4] (rev 20)
+f6:00.2 System peripheral [0880]: Intel Corporation Ice Lake RAS [8086:09a3] (rev 20)
+f6:00.4 Generic system peripheral [0807]: Intel Corporation Device [8086:0b23]
+f6:01.0 System peripheral [0880]: Intel Corporation Device [8086:0b25]
+f6:02.0 System peripheral [0880]: Intel Corporation Device [8086:0cfe]
+fe:00.0 System peripheral [0880]: Intel Corporation Device [8086:3250]
+fe:00.1 System peripheral [0880]: Intel Corporation Device [8086:3251]
+fe:00.2 System peripheral [0880]: Intel Corporation Device [8086:3252]
+fe:00.3 Host bridge [0600]: Intel Corporation Ice Lake IEH [8086:0998]
+fe:00.5 System peripheral [0880]: Intel Corporation Device [8086:3255]
+fe:01.0 System peripheral [0880]: Intel Corporation Device [8086:3240]
+fe:01.1 System peripheral [0880]: Intel Corporation Device [8086:3241]
+fe:01.2 System peripheral [0880]: Intel Corporation Device [8086:3242]
+fe:02.0 System peripheral [0880]: Intel Corporation Device [8086:3240]
+fe:02.1 System peripheral [0880]: Intel Corporation Device [8086:3241]
+fe:02.2 System peripheral [0880]: Intel Corporation Device [8086:3242]
+fe:03.0 System peripheral [0880]: Intel Corporation Device [8086:3240]
+fe:03.1 System peripheral [0880]: Intel Corporation Device [8086:3241]
+fe:03.2 System peripheral [0880]: Intel Corporation Device [8086:3242]
+fe:04.0 System peripheral [0880]: Intel Corporation Device [8086:3240]
+fe:04.1 System peripheral [0880]: Intel Corporation Device [8086:3241]
+fe:04.2 System peripheral [0880]: Intel Corporation Device [8086:3242]
+fe:05.0 System peripheral [0880]: Intel Corporation Device [8086:3245]
+fe:05.1 System peripheral [0880]: Intel Corporation Device [8086:3246]
+fe:05.2 System peripheral [0880]: Intel Corporation Device [8086:3247]
+fe:06.0 System peripheral [0880]: Intel Corporation Device [8086:3245]
+fe:06.1 System peripheral [0880]: Intel Corporation Device [8086:3246]
+fe:06.2 System peripheral [0880]: Intel Corporation Device [8086:3247]
+fe:07.0 System peripheral [0880]: Intel Corporation Device [8086:3245]
+fe:07.1 System peripheral [0880]: Intel Corporation Device [8086:3246]
+fe:07.2 System peripheral [0880]: Intel Corporation Device [8086:3247]
+fe:08.0 System peripheral [0880]: Intel Corporation Device [8086:3245]
+fe:08.1 System peripheral [0880]: Intel Corporation Device [8086:3246]
+fe:08.2 System peripheral [0880]: Intel Corporation Device [8086:3247]
+fe:0c.0 Performance counters [1101]: Intel Corporation Device [8086:324a]
+fe:0d.0 Performance counters [1101]: Intel Corporation Device [8086:324a]
+fe:0e.0 Performance counters [1101]: Intel Corporation Device [8086:324a]
+fe:0f.0 Performance counters [1101]: Intel Corporation Device [8086:324a]
+fe:1a.0 Performance counters [1101]: Intel Corporation Device [8086:2880]
+fe:1b.0 Performance counters [1101]: Intel Corporation Device [8086:2880]
+fe:1c.0 Performance counters [1101]: Intel Corporation Device [8086:2880]
+fe:1d.0 Performance counters [1101]: Intel Corporation Device [8086:2880]
+ff:00.0 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:00.1 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:00.2 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:00.3 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:00.4 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:00.5 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:00.6 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:00.7 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:01.0 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:01.1 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:01.2 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:01.3 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:01.4 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:01.5 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:01.6 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:01.7 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:02.0 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:02.1 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:02.2 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:02.3 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:02.4 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:02.5 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:02.6 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:02.7 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:03.0 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:03.1 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:03.2 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:03.3 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:03.4 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:03.5 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:03.6 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:03.7 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:04.0 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:04.1 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:04.2 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:04.3 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:04.4 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:04.5 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:04.6 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:04.7 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:05.0 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:05.1 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:05.2 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:05.3 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:05.4 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:05.5 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:05.6 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:05.7 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:06.0 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:06.1 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:06.2 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:06.3 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:06.4 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:06.5 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:06.6 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:06.7 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:07.0 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:07.1 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:07.2 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:07.3 System peripheral [0880]: Intel Corporation Device [8086:324c]
+ff:0a.0 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0a.1 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0a.2 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0a.3 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0a.4 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0a.5 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0a.6 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0a.7 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0b.0 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0b.1 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0b.2 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0b.3 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0b.4 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0b.5 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0b.6 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0b.7 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0c.0 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0c.1 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0c.2 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0c.3 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0c.4 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0c.5 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0c.6 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0c.7 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0d.0 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0d.1 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0d.2 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0d.3 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0d.4 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0d.5 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0d.6 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0d.7 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0e.0 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0e.1 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0e.2 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0e.3 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0e.4 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0e.5 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0e.6 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0e.7 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0f.0 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0f.1 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0f.2 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0f.3 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0f.4 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0f.5 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0f.6 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:0f.7 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:10.0 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:10.1 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:10.2 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:10.3 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:10.4 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:10.5 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:10.6 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:10.7 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:11.0 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:11.1 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:11.2 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:11.3 System peripheral [0880]: Intel Corporation Device [8086:324d]
+ff:1d.0 System peripheral [0880]: Intel Corporation Device [8086:344f]
+ff:1d.1 System peripheral [0880]: Intel Corporation Device [8086:3457]
+ff:1e.0 System peripheral [0880]: Intel Corporation Device [8086:3258] (rev 02)
+ff:1e.1 System peripheral [0880]: Intel Corporation Device [8086:3259] (rev 02)
+ff:1e.2 System peripheral [0880]: Intel Corporation Device [8086:325a] (rev 02)
+ff:1e.3 System peripheral [0880]: Intel Corporation Device [8086:325b] (rev 02)
+ff:1e.4 System peripheral [0880]: Intel Corporation Device [8086:325c] (rev 02)
+ff:1e.5 System peripheral [0880]: Intel Corporation Device [8086:325d] (rev 02)
+ff:1e.6 System peripheral [0880]: Intel Corporation Device [8086:325e] (rev 02)
+ff:1e.7 System peripheral [0880]: Intel Corporation Device [8086:325f] (rev 02)

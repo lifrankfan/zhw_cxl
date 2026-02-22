@@ -1,0 +1,3055 @@
+{
+  "columns":
+  ["", "ALUTs", "FFs", "RAMs", "DSPs", "MLABs", "Details"]
+  , "debug_enabled":"true"
+  , "type":"module"
+  , "total_percent":
+  [1.39985, 0.767857, 0.684832, 0, 0]
+  , "total":
+  [5562, 13346, 0, 0, 96]
+  , "name":"System"
+  , "max_resources":
+  [974400, 1948800, 7110, 4510, 48720]
+  , "children":
+  [
+    {
+      "name":"zfp_1d_decompress"
+      , "compute_units":1
+      , "type":"function"
+      , "total_percent":
+      [1.39985, 0.767857, 0.684832, 0, 0]
+      , "total_kernel_resources":
+      [5562, 13346, 0, 0, 96]
+      , "details":
+      [
+        {
+          "type":"text"
+          , "text":"Number of compute units: 1"
+        }
+        , {
+          "type":"brief"
+          , "text":"1 compute unit."
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"Coalesced Variables: \n - 'block' (zfp_1d_decompress.cpp:242)\n - 'a' (zfp_1d_decompress.cpp:15)"
+          , "type":"resource"
+          , "data":
+          [8, 128, 0, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"zfp_1d_decompress.cpp"
+                , "line":15
+              }
+            ]
+            , [
+              {
+                "filename":"zfp_1d_decompress.cpp"
+                , "line":242
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Type: Register"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 64 bits"
+            }
+            , {
+              "type":"brief"
+              , "text":"Register,\n1 reg, 64 width"
+            }
+          ]
+        }
+        , {
+          "name":"Coalesced Variables: \n - 'block' (zfp_1d_decompress.cpp:242)\n - 'b' (zfp_1d_decompress.cpp:15)"
+          , "type":"resource"
+          , "data":
+          [8, 128, 0, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"zfp_1d_decompress.cpp"
+                , "line":15
+              }
+            ]
+            , [
+              {
+                "filename":"zfp_1d_decompress.cpp"
+                , "line":242
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Type: Register"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 64 bits"
+            }
+            , {
+              "type":"brief"
+              , "text":"Register,\n1 reg, 64 width"
+            }
+          ]
+        }
+        , {
+          "name":"Coalesced Variables: \n - 'block' (zfp_1d_decompress.cpp:242)\n - 'c' (zfp_1d_decompress.cpp:15)"
+          , "type":"resource"
+          , "data":
+          [8, 128, 0, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"zfp_1d_decompress.cpp"
+                , "line":15
+              }
+            ]
+            , [
+              {
+                "filename":"zfp_1d_decompress.cpp"
+                , "line":242
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Type: Register"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 64 bits"
+            }
+            , {
+              "type":"brief"
+              , "text":"Register,\n1 reg, 64 width"
+            }
+          ]
+        }
+        , {
+          "name":"Coalesced Variables: \n - 'block' (zfp_1d_decompress.cpp:242)\n - 'd' (zfp_1d_decompress.cpp:15)"
+          , "type":"resource"
+          , "data":
+          [8, 128, 0, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"zfp_1d_decompress.cpp"
+                , "line":15
+              }
+            ]
+            , [
+              {
+                "filename":"zfp_1d_decompress.cpp"
+                , "line":242
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Type: Register"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 64 bits"
+            }
+            , {
+              "type":"brief"
+              , "text":"Register,\n1 reg, 64 width"
+            }
+          ]
+        }
+        , {
+          "name":"Component call"
+          , "type":"resource"
+          , "data":
+          [0, 0, 0, 0, 0]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Stream implemented 1 bit wide with a buffer size of 0 elements."
+            }
+            , {
+              "type":"brief"
+              , "text":"1b wide with 0 elements."
+            }
+          ]
+        }
+        , {
+          "name":"Component return"
+          , "type":"resource"
+          , "data":
+          [0, 0, 0, 0, 0]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Stream implemented 1 bit wide with a buffer size of 0 elements."
+            }
+            , {
+              "type":"brief"
+              , "text":"1b wide with 0 elements."
+            }
+          ]
+        }
+        , {
+          "name":"Stream 'in_stream'"
+          , "type":"resource"
+          , "data":
+          [0, 0, 0, 0, 0]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Stream implemented 64 bits wide with a buffer size of 0 elements."
+            }
+            , {
+              "type":"brief"
+              , "text":"64b wide with 0 elements."
+            }
+          ]
+        }
+        , {
+          "name":"Stream 'out_stream'"
+          , "type":"resource"
+          , "data":
+          [0, 0, 0, 0, 0]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Stream implemented 64 bits wide with a buffer size of 0 elements."
+            }
+            , {
+              "type":"brief"
+              , "text":"64b wide with 0 elements."
+            }
+          ]
+        }
+        , {
+          "name":"Variable: \n - 'bs' (zfp_1d_decompress.cpp:240)"
+          , "type":"resource"
+          , "data":
+          [22, 204, 0, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"zfp_1d_decompress.cpp"
+                , "line":240
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Type: Register"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 32 bits and depth 2"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":" Depth was increased by a factor of 2 due to a loop initiation interval of 2."
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 64 bits and depth 2"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":" Depth was increased by a factor of 2 due to a loop initiation interval of 2."
+                }
+              ]
+            }
+            , {
+              "type":"brief"
+              , "text":"Register,\n1 reg, 32 width by 2 depth,\n1 reg, 64 width by 2 depth"
+            }
+          ]
+        }
+        , {
+          "name":"Variable: \n - 'i' (zfp_1d_decompress.cpp:207)"
+          , "type":"resource"
+          , "data":
+          [22, 82, 0, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"zfp_1d_decompress.cpp"
+                , "line":207
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Type: Register"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 3 bits and depth 2"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":" Depth was increased by a factor of 2 due to a loop initiation interval of 2."
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 32 bits and depth 2"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":" Depth was increased by a factor of 2 due to a loop initiation interval of 2."
+                }
+              ]
+            }
+            , {
+              "type":"brief"
+              , "text":"Register,\n1 reg, 3 width by 2 depth,\n1 reg, 32 width by 2 depth"
+            }
+          ]
+        }
+        , {
+          "name":"Variable: \n - 'i' (zfp_1d_decompress.cpp:216)"
+          , "type":"resource"
+          , "data":
+          [16, 70, 0, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"zfp_1d_decompress.cpp"
+                , "line":216
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Type: Register"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 3 bits"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 32 bits"
+            }
+            , {
+              "type":"brief"
+              , "text":"Register,\n1 reg, 3 width,\n1 reg, 32 width"
+            }
+          ]
+        }
+        , {
+          "name":"Variable: \n - 'i' (zfp_1d_decompress.cpp:252)"
+          , "type":"resource"
+          , "data":
+          [32, 70, 0, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"zfp_1d_decompress.cpp"
+                , "line":252
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Type: Register"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 3 bits"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 32 bits"
+            }
+            , {
+              "type":"brief"
+              , "text":"Register,\n1 reg, 3 width,\n1 reg, 32 width"
+            }
+          ]
+        }
+        , {
+          "name":"Variable: \n - 'k' (zfp_1d_decompress.cpp:138)"
+          , "type":"resource"
+          , "data":
+          [7, 36, 0, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"zfp_1d_decompress.cpp"
+                , "line":138
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Type: Register"
+            }
+            , {
+              "type":"text"
+              , "text":"1 register of width 32 bits and depth 1"
+            }
+            , {
+              "type":"brief"
+              , "text":"Register,\n1 reg, 32 width by 1 depth"
+            }
+          ]
+        }
+        , {
+          "name":"Variable: \n - 'ublock' (zfp_1d_decompress.cpp:71)"
+          , "type":"resource"
+          , "data":
+          [276, 2124, 0, 0, 0]
+          , "debug":
+          [
+            [
+              {
+                "filename":"zfp_1d_decompress.cpp"
+                , "line":71
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"text"
+              , "text":"Type: Register"
+            }
+            , {
+              "type":"text"
+              , "text":"4 registers of width 64 bits and depth 2"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":" Depth was increased by a factor of 2 due to a loop initiation interval of 2."
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"4 registers of width 64 bits and depth 4"
+            }
+            , {
+              "type":"brief"
+              , "text":"Register,\n4 regs, 64 width by 2 depth,\n4 regs, 64 width by 4 depth"
+            }
+          ]
+        }
+        , {
+          "name":"zfp_1d_decompress.B1.start"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"Feedback"
+              , "type":"resource"
+              , "data":
+              [14, 9, 0, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Loop-carried dependencies"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for loop-carried dependencies. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce number and size of loop-carried variables"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [14, 9, 0, 0, 0]
+                }
+              ]
+            }
+            , {
+              "name":"Cluster logic"
+              , "type":"resource"
+              , "data":
+              [11, 9, 0, 0, 1]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"zfp_1d_decompress.cpp:230"
+                  , "type":"resource"
+                  , "data":
+                  [2, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":230
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Stream Read"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [2, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"zfp_1d_decompress.B2"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [0, 192, 0, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Live values and control logic"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [0, 192, 0, 0, 0]
+                }
+              ]
+            }
+            , {
+              "name":"Cluster logic"
+              , "type":"resource"
+              , "data":
+              [10, 8, 0, 0, 1]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"zfp_1d_decompress.B3"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [149, 312, 0, 0, 2]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Live values and control logic"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [149, 312, 0, 0, 2]
+                }
+              ]
+            }
+            , {
+              "name":"Feedback"
+              , "type":"resource"
+              , "data":
+              [238, 381, 0, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Loop-carried dependencies"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for loop-carried dependencies. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce number and size of loop-carried variables"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"zfp_1d_decompress.cpp:240"
+                  , "type":"resource"
+                  , "data":
+                  [63, 101, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":240
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:138"
+                  , "type":"resource"
+                  , "data":
+                  [15, 18, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":138
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:208 > \nhls_stream.h:30 > hls_stream.h:24 > \n_stream.h:591"
+                  , "type":"resource"
+                  , "data":
+                  [7, 2, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":208
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":30
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":24
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:209"
+                  , "type":"resource"
+                  , "data":
+                  [19, 32.5, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":209
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:71"
+                  , "type":"resource"
+                  , "data":
+                  [134, 227.5, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":71
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"Cluster logic"
+              , "type":"resource"
+              , "data":
+              [101, 159, 0, 0, 8]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"zfp_1d_decompress.cpp:240"
+                  , "type":"resource"
+                  , "data":
+                  [32, 32, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":240
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"64-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [32, 32, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:191 > \nhls_stream.h:30"
+                  , "type":"resource"
+                  , "data":
+                  [11, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":191
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":30
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [11, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:191 > \nhls_stream.h:30 > hls_stream.h:24 > \n_stream.h:591"
+                  , "type":"resource"
+                  , "data":
+                  [36, 35, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":191
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":30
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":24
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"64-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [32, 32, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Stream Read"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [4, 3, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:191 > \nhls_stream.h:32"
+                  , "type":"resource"
+                  , "data":
+                  [101, 64, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":191
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":32
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [16, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"64-bit And"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [64, 64, 0, 0, 0]
+                    }
+                    , {
+                      "name":"64-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [21, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"zfp_1d_decompress.B4"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [241, 2748, 0, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Live values and control logic"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [241, 2748, 0, 0, 0]
+                }
+              ]
+            }
+            , {
+              "name":"Feedback"
+              , "type":"resource"
+              , "data":
+              [178, 977, 0, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Loop-carried dependencies"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for loop-carried dependencies. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce number and size of loop-carried variables"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [12, 8, 0, 0, 0]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:240"
+                  , "type":"resource"
+                  , "data":
+                  [22.3333, 130.5, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":240
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:138"
+                  , "type":"resource"
+                  , "data":
+                  [36, 86, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":138
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:191 > \nhls_stream.h:30 > hls_stream.h:24 > \n_stream.h:591"
+                  , "type":"resource"
+                  , "data":
+                  [21, 130.5, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":191
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":30
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":24
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:191 > \nhls_stream.h:32"
+                  , "type":"resource"
+                  , "data":
+                  [24, 78, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":191
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":32
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:191 > \nhls_stream.h:33"
+                  , "type":"resource"
+                  , "data":
+                  [0.333333, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":191
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":33
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:207"
+                  , "type":"resource"
+                  , "data":
+                  [9, 8, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":207
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:208 > \nhls_stream.h:33"
+                  , "type":"resource"
+                  , "data":
+                  [0.333333, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":208
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":33
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:209"
+                  , "type":"resource"
+                  , "data":
+                  [6, 67, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":209
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:71"
+                  , "type":"resource"
+                  , "data":
+                  [47, 469, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":71
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"Cluster logic"
+              , "type":"resource"
+              , "data":
+              [571, 1091, 0, 0, 56]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"zfp_1d_decompress.cpp:240"
+                  , "type":"resource"
+                  , "data":
+                  [25.5, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":240
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"64-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [25.5, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:71"
+                  , "type":"resource"
+                  , "data":
+                  [68, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":71
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"64-bit Select"
+                      , "type":"resource"
+                      , "count":4
+                      , "data":
+                      [68, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:191 > \nhls_stream.h:32"
+                  , "type":"resource"
+                  , "data":
+                  [0.5, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":191
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":32
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit Or"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [0.5, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:207"
+                  , "type":"resource"
+                  , "data":
+                  [19.8333, 1.5, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":207
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit And"
+                      , "type":"resource"
+                      , "count":5
+                      , "data":
+                      [2.33333, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"3-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":3
+                      , "data":
+                      [16.5, 1.5, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:208 > \nhls_stream.h:30"
+                  , "type":"resource"
+                  , "data":
+                  [11.5, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":208
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":30
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit Or"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [0.5, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [11, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:208 > \nhls_stream.h:30 > hls_stream.h:24 > \n_stream.h:591"
+                  , "type":"resource"
+                  , "data":
+                  [26.5, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":208
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":30
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":24
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"64-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [25.5, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"Stream Read"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:208 > \nhls_stream.h:32"
+                  , "type":"resource"
+                  , "data":
+                  [102.333, 65, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":208
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":32
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit And"
+                      , "type":"resource"
+                      , "count":4
+                      , "data":
+                      [1.33333, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [16, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"64-bit And"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [64, 64, 0, 0, 0]
+                    }
+                    , {
+                      "name":"64-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [21, 1, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:209"
+                  , "type":"resource"
+                  , "data":
+                  [345.833, 65.5, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":209
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit And"
+                      , "type":"resource"
+                      , "count":4
+                      , "data":
+                      [1.33333, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":3
+                      , "data":
+                      [16.5, 1.5, 0, 0, 0]
+                    }
+                    , {
+                      "name":"64-bit Or"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [64, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"64-bit Select"
+                      , "type":"resource"
+                      , "count":8
+                      , "data":
+                      [136, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"llvm.fpga.case"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [128, 64, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"zfp_1d_decompress.B5"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [5, 266, 0, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Live values and control logic"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [5, 10, 0, 0, 0]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:209"
+                  , "type":"resource"
+                  , "data":
+                  [0, 64, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":209
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:71"
+                  , "type":"resource"
+                  , "data":
+                  [0, 192, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":71
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"Feedback"
+              , "type":"resource"
+              , "data":
+              [127, 621, 0, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Loop-carried dependencies"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for loop-carried dependencies. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce number and size of loop-carried variables"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"zfp_1d_decompress.cpp:240"
+                  , "type":"resource"
+                  , "data":
+                  [72, 465.333, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":240
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:191 > \nhls_stream.h:33"
+                  , "type":"resource"
+                  , "data":
+                  [14, 68.3333, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":191
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":33
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:208 > \nhls_stream.h:30 > hls_stream.h:24 > \n_stream.h:591"
+                  , "type":"resource"
+                  , "data":
+                  [27, 19, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":208
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":30
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":24
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:208 > \nhls_stream.h:33"
+                  , "type":"resource"
+                  , "data":
+                  [14, 68.3333, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":208
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":33
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"Cluster logic"
+              , "type":"resource"
+              , "data":
+              [186, 360, 0, 0, 18]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"zfp_1d_decompress.cpp:240"
+                  , "type":"resource"
+                  , "data":
+                  [74.6667, 74.6667, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":240
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [10.6667, 10.6667, 0, 0, 0]
+                    }
+                    , {
+                      "name":"64-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [64, 64, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:71"
+                  , "type":"resource"
+                  , "data":
+                  [192, 192, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":71
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"64-bit Select"
+                      , "type":"resource"
+                      , "count":4
+                      , "data":
+                      [192, 192, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:191 > \nhls_stream.h:33"
+                  , "type":"resource"
+                  , "data":
+                  [10.6667, 10.6667, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":191
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":33
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [10.6667, 10.6667, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:208 > \nhls_stream.h:33"
+                  , "type":"resource"
+                  , "data":
+                  [10.6667, 10.6667, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":208
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                        , "line":33
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [10.6667, 10.6667, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:209"
+                  , "type":"resource"
+                  , "data":
+                  [64, 64, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":209
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"64-bit Select"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [64, 64, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"zfp_1d_decompress.B6"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [2, 280, 0, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Live values and control logic"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [2, 24, 0, 0, 0]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:222"
+                  , "type":"resource"
+                  , "data":
+                  [0, 256, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":222
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"Feedback"
+              , "type":"resource"
+              , "data":
+              [162, 9, 0, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Loop-carried dependencies"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for loop-carried dependencies. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce number and size of loop-carried variables"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [10.6667, 0, 0, 0, 0]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:242"
+                  , "type":"resource"
+                  , "data":
+                  [108.667, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":242
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:216"
+                  , "type":"resource"
+                  , "data":
+                  [32, 9, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":216
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:222"
+                  , "type":"resource"
+                  , "data":
+                  [10.6667, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":222
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"Cluster logic"
+              , "type":"resource"
+              , "data":
+              [14, 10, 0, 0, 1]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:216"
+                  , "type":"resource"
+                  , "data":
+                  [2, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":216
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit And"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"3-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:246 > zfp_1d_decompress.cpp:222"
+                  , "type":"resource"
+                  , "data":
+                  [365, 67, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":246
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":222
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":3
+                      , "data":
+                      [33, 3, 0, 0, 0]
+                    }
+                    , {
+                      "name":"64-bit Select"
+                      , "type":"resource"
+                      , "count":4
+                      , "data":
+                      [204, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"llvm.fpga.case"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [128, 64, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"zfp_1d_decompress.B7"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [0, 1026, 0, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Live values and control logic"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [0, 770, 0, 0, 0]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:249 > zfp_1d_decompress.cpp:38"
+                  , "type":"resource"
+                  , "data":
+                  [0, 64, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":249
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":38
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:249 > zfp_1d_decompress.cpp:39"
+                  , "type":"resource"
+                  , "data":
+                  [0, 64, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":249
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":39
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:249 > zfp_1d_decompress.cpp:42"
+                  , "type":"resource"
+                  , "data":
+                  [0, 64, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":249
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":42
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:249 > zfp_1d_decompress.cpp:43"
+                  , "type":"resource"
+                  , "data":
+                  [0, 64, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":249
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":43
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"Cluster logic"
+              , "type":"resource"
+              , "data":
+              [10, 8, 0, 0, 1]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"zfp_1d_decompress.cpp:249 > zfp_1d_decompress.cpp:24"
+                  , "type":"resource"
+                  , "data":
+                  [64, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":249
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":24
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"64-bit Integer Add"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [64, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:249 > zfp_1d_decompress.cpp:27"
+                  , "type":"resource"
+                  , "data":
+                  [64, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":249
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":27
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"64-bit Integer Subtract"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [64, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:249 > zfp_1d_decompress.cpp:30"
+                  , "type":"resource"
+                  , "data":
+                  [64, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":249
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":30
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"64-bit Integer Add"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [64, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:249 > zfp_1d_decompress.cpp:31"
+                  , "type":"resource"
+                  , "data":
+                  [64, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":249
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":31
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"64-bit Integer Add"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [64, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:249 > zfp_1d_decompress.cpp:34"
+                  , "type":"resource"
+                  , "data":
+                  [64, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":249
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":34
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"64-bit Integer Subtract"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [64, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:249 > zfp_1d_decompress.cpp:35"
+                  , "type":"resource"
+                  , "data":
+                  [64, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":249
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":35
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"64-bit Integer Subtract"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [64, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:249 > zfp_1d_decompress.cpp:38"
+                  , "type":"resource"
+                  , "data":
+                  [64, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":249
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":38
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"64-bit Integer Add"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [64, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:249 > zfp_1d_decompress.cpp:39"
+                  , "type":"resource"
+                  , "data":
+                  [64, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":249
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":39
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"64-bit Integer Add"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [64, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:249 > zfp_1d_decompress.cpp:42"
+                  , "type":"resource"
+                  , "data":
+                  [64, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":249
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":42
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"64-bit Integer Subtract"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [64, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:249 > zfp_1d_decompress.cpp:43"
+                  , "type":"resource"
+                  , "data":
+                  [64, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":249
+                      }
+                      , {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":43
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"64-bit Integer Subtract"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [64, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"zfp_1d_decompress.B8"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"State"
+              , "type":"resource"
+              , "data":
+              [83, 710, 0, 0, 4]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Live values and control logic"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for live values and control logic. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce size of local variables"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce scope of local variables, localizing them as much as possible"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"reduce number of nested loops"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [83, 710, 0, 0, 4]
+                }
+              ]
+            }
+            , {
+              "name":"Feedback"
+              , "type":"resource"
+              , "data":
+              [74, 137, 0, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Loop-carried dependencies"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for loop-carried dependencies. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce number and size of loop-carried variables"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [8, 128, 0, 0, 0]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:252"
+                  , "type":"resource"
+                  , "data":
+                  [32, 9, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":252
+                      }
+                    ]
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:256"
+                  , "type":"resource"
+                  , "data":
+                  [34, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":256
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+            , {
+              "name":"Cluster logic"
+              , "type":"resource"
+              , "data":
+              [46, 74, 0, 0, 4]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Logic required to efficiently support sets of operations that do not stall. This area cannot be affected directly."
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [124, 2, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":0
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"32-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [22, 2, 0, 0, 0]
+                    }
+                    , {
+                      "name":"64-bit Select"
+                      , "type":"resource"
+                      , "count":2
+                      , "data":
+                      [102, 0, 0, 0, 0]
+                    }
+                  ]
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:252"
+                  , "type":"resource"
+                  , "data":
+                  [2, 0, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":252
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"1-bit And"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 0, 0, 0, 0]
+                    }
+                    , {
+                      "name":"3-bit Integer Compare"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [1, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:256"
+                  , "type":"resource"
+                  , "data":
+                  [654, 165, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":256
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"'Convert 64-bit Signed Integer to Double-precision Floating-point' Function Call"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [603, 165, 0, 0, 0]
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Implemented using inlined soft-IP."
+                        }
+                      ]
+                    }
+                    , {
+                      "name":"64-bit Select"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [51, 0, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+                , {
+                  "name":"zfp_1d_decompress.cpp:257 > _stream.h:725"
+                  , "type":"resource"
+                  , "data":
+                  [4, 2, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":257
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Stream Write"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [4, 2, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+        , {
+          "name":"zfp_1d_decompress.B9"
+          , "type":"basicblock"
+          , "children":
+          [
+            {
+              "name":"Feedback"
+              , "type":"resource"
+              , "data":
+              [5, 8, 0, 0, 0]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Loop-carried dependencies"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Resources for loop-carried dependencies. To reduce this area:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"reduce number and size of loop-carried variables"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"No Source Line"
+                  , "type":"resource"
+                  , "data":
+                  [5, 8, 0, 0, 0]
+                }
+              ]
+            }
+            , {
+              "name":"Computation"
+              , "type":"resource"
+              , "children":
+              [
+                {
+                  "name":"zfp_1d_decompress.cpp:259"
+                  , "type":"resource"
+                  , "data":
+                  [3, 2, 0, 0, 0]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                        , "line":259
+                      }
+                    ]
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Stream Write"
+                      , "type":"resource"
+                      , "count":1
+                      , "data":
+                      [3, 2, 0, 0, 0]
+                    }
+                  ]
+                  , "replace_name":"true"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

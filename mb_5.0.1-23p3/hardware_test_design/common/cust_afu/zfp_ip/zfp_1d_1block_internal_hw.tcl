@@ -1,0 +1,388 @@
+package require -exact qsys 15.0
+set_module_property NAME zfp_1d_1block_internal
+set_module_property VERSION 1.0
+set_module_property INTERNAL true
+set_module_property GROUP HLS
+set_module_property DISPLAY_NAME zfp_1d_1block_internal
+set_module_property INSTANTIATE_IN_SYSTEM_MODULE true
+set_module_property EDITABLE true
+set_module_property SUPPORTED_DEVICE_FAMILIES {"Agilex"}
+set_module_assignment hls.cosim.name {_Z13zfp_1d_1blockRN3ihc9stream_inIlJEEERNS_10stream_outIdJEEE}
+set_module_assignment hls.compressed.name {zfp_1d_1block}
+
+#### Synthesis fileset
+add_fileset QUARTUS_SYNTH QUARTUS_SYNTH "" ""
+set_fileset_property QUARTUS_SYNTH TOP_LEVEL zfp_1d_1block_internal
+set_fileset_property QUARTUS_SYNTH ENABLE_RELATIVE_INCLUDE_PATHS false
+add_fileset_file "acl_reset_handler.sv" SYSTEM_VERILOG PATH "ip/acl_reset_handler.sv"
+add_fileset_file "dspba_library_ver.sv" SYSTEM_VERILOG PATH "linux64/lib/hld_backend/Libraries/sv/base/dspba_library_ver.sv"
+add_fileset_file "acl_ecc_pkg.sv" SYSTEM_VERILOG PATH "ip/acl_ecc_pkg.sv"
+add_fileset_file "acl_data_fifo.v" SYSTEM_VERILOG PATH "ip/acl_data_fifo.v"
+add_fileset_file "acl_fifo.v" SYSTEM_VERILOG PATH "ip/acl_fifo.v"
+add_fileset_file "acl_altera_syncram_wrapped.sv" SYSTEM_VERILOG PATH "ip/acl_altera_syncram_wrapped.sv"
+add_fileset_file "acl_scfifo_wrapped.sv" SYSTEM_VERILOG PATH "ip/acl_scfifo_wrapped.sv"
+add_fileset_file "acl_ecc_decoder.sv" SYSTEM_VERILOG PATH "ip/acl_ecc_decoder.sv"
+add_fileset_file "acl_ecc_encoder.sv" SYSTEM_VERILOG PATH "ip/acl_ecc_encoder.sv"
+add_fileset_file "acl_ll_fifo.v" SYSTEM_VERILOG PATH "ip/acl_ll_fifo.v"
+add_fileset_file "acl_ll_ram_fifo.v" SYSTEM_VERILOG PATH "ip/acl_ll_ram_fifo.v"
+add_fileset_file "acl_valid_fifo_counter.v" SYSTEM_VERILOG PATH "ip/acl_valid_fifo_counter.v"
+add_fileset_file "acl_dspba_valid_fifo_counter.v" SYSTEM_VERILOG PATH "ip/acl_dspba_valid_fifo_counter.v"
+add_fileset_file "acl_staging_reg.v" SYSTEM_VERILOG PATH "ip/acl_staging_reg.v"
+add_fileset_file "hld_fifo.sv" SYSTEM_VERILOG PATH "ip/hld_fifo.sv"
+add_fileset_file "acl_mid_speed_fifo.sv" SYSTEM_VERILOG PATH "ip/acl_mid_speed_fifo.sv"
+add_fileset_file "acl_latency_one_ram_fifo.sv" SYSTEM_VERILOG PATH "ip/acl_latency_one_ram_fifo.sv"
+add_fileset_file "acl_latency_zero_ram_fifo.sv" SYSTEM_VERILOG PATH "ip/acl_latency_zero_ram_fifo.sv"
+add_fileset_file "hld_fifo_zero_width.sv" SYSTEM_VERILOG PATH "ip/hld_fifo_zero_width.sv"
+add_fileset_file "acl_high_speed_fifo.sv" SYSTEM_VERILOG PATH "ip/acl_high_speed_fifo.sv"
+add_fileset_file "acl_low_latency_fifo.sv" SYSTEM_VERILOG PATH "ip/acl_low_latency_fifo.sv"
+add_fileset_file "acl_zero_latency_fifo.sv" SYSTEM_VERILOG PATH "ip/acl_zero_latency_fifo.sv"
+add_fileset_file "acl_fanout_pipeline.sv" SYSTEM_VERILOG PATH "ip/acl_fanout_pipeline.sv"
+add_fileset_file "acl_std_synchronizer_nocut.v" SYSTEM_VERILOG PATH "ip/acl_std_synchronizer_nocut.v"
+add_fileset_file "acl_tessellated_incr_decr_threshold.sv" SYSTEM_VERILOG PATH "ip/acl_tessellated_incr_decr_threshold.sv"
+add_fileset_file "acl_tessellated_incr_lookahead.sv" SYSTEM_VERILOG PATH "ip/acl_tessellated_incr_lookahead.sv"
+add_fileset_file "acl_lfsr.sv" SYSTEM_VERILOG PATH "ip/acl_lfsr.sv"
+add_fileset_file "acl_mlab_fifo.sv" SYSTEM_VERILOG PATH "ip/acl_mlab_fifo.sv"
+add_fileset_file "acl_parameter_assert.svh" SYSTEM_VERILOG PATH "ip/acl_parameter_assert.svh"
+add_fileset_file "acl_pop_stall_latency.sv" SYSTEM_VERILOG PATH "ip/acl_pop_stall_latency.sv"
+add_fileset_file "acl_sync.sv" SYSTEM_VERILOG PATH "ip/acl_sync.sv"
+add_fileset_file "acl_desync.sv" SYSTEM_VERILOG PATH "ip/acl_desync.sv"
+add_fileset_file "acl_push_stall_latency.sv" SYSTEM_VERILOG PATH "ip/acl_push_stall_latency.sv"
+add_fileset_file "acl_dspba_buffer.v" SYSTEM_VERILOG PATH "ip/acl_dspba_buffer.v"
+add_fileset_file "acl_fast_pipeline.v" SYSTEM_VERILOG PATH "ip/acl_fast_pipeline.v"
+add_fileset_file "acl_push.v" SYSTEM_VERILOG PATH "ip/acl_push.v"
+add_fileset_file "acl_token_fifo_counter.v" SYSTEM_VERILOG PATH "ip/acl_token_fifo_counter.v"
+add_fileset_file "acl_full_detector.v" SYSTEM_VERILOG PATH "ip/acl_full_detector.v"
+add_fileset_file "acl_tessellated_incr_decr_decr.sv" SYSTEM_VERILOG PATH "ip/acl_tessellated_incr_decr_decr.sv"
+add_fileset_file "acl_loop_admit.sv" SYSTEM_VERILOG PATH "ip/acl_loop_admit.sv"
+add_fileset_file "acl_shift_register_no_reset_dont_merge.sv" SYSTEM_VERILOG PATH "ip/acl_shift_register_no_reset_dont_merge.sv"
+add_fileset_file "hld_memory_depth_quantization_pkg.sv" SYSTEM_VERILOG PATH "ip/hld_memory_depth_quantization_pkg.sv"
+add_fileset_file "hld_iord.sv" SYSTEM_VERILOG PATH "ip/hld_iord.sv"
+add_fileset_file "hld_iord_stall_latency.sv" SYSTEM_VERILOG PATH "ip/hld_iord_stall_latency.sv"
+add_fileset_file "hld_iord_stall_valid.sv" SYSTEM_VERILOG PATH "ip/hld_iord_stall_valid.sv"
+add_fileset_file "acl_shift_register_no_reset.sv" SYSTEM_VERILOG PATH "ip/acl_shift_register_no_reset.sv"
+add_fileset_file "acl_ffwddst.sv" SYSTEM_VERILOG PATH "ip/acl_ffwddst.sv"
+add_fileset_file "acl_ffwdsrc.v" SYSTEM_VERILOG PATH "ip/acl_ffwdsrc.v"
+add_fileset_file "ternary_add.v" SYSTEM_VERILOG PATH "ip/ternary_add.v"
+add_fileset_file "six_three_comp.v" SYSTEM_VERILOG PATH "ip/six_three_comp.v"
+add_fileset_file "acl_popcount.sv" SYSTEM_VERILOG PATH "ip/acl_popcount.sv"
+add_fileset_file "hld_iowr.sv" SYSTEM_VERILOG PATH "ip/hld_iowr.sv"
+add_fileset_file "hld_iowr_stall_latency.sv" SYSTEM_VERILOG PATH "ip/hld_iowr_stall_latency.sv"
+add_fileset_file "hld_iowr_stall_valid.sv" SYSTEM_VERILOG PATH "ip/hld_iowr_stall_valid.sv"
+add_fileset_file "hld_loop_profiler.sv" SYSTEM_VERILOG PATH "ip/hld_loop_profiler.sv"
+add_fileset_file "hld_sim_latency_tracker.sv" SYSTEM_VERILOG PATH "ip/hld_sim_latency_tracker.sv"
+add_fileset_file "zfp_1d_1block_function_wrapper.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_function_wrapper.sv"
+add_fileset_file "zfp_1d_1block_start_pulse.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_start_pulse.sv"
+add_fileset_file "zfp_1d_1block_wait_pulse_extender_inst.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_wait_pulse_extender_inst.sv"
+add_fileset_file "zfp_1d_1block_function.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_function.sv"
+add_fileset_file "zfp_1d_1block_bb_B0_runOnce.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B0_runOnce.sv"
+add_fileset_file "zfp_1d_1block_bb_B0_runOnce_stall_region.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B0_runOnce_stall_region.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_pop_token_i1_wt_limpop_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_pop_token_i1_wt_limpop_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_push_token_i1_wt_limpush_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_push_token_i1_wt_limpush_0.sv"
+add_fileset_file "zfp_1d_1block_B0_runOnce_branch.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B0_runOnce_branch.sv"
+add_fileset_file "zfp_1d_1block_B0_runOnce_merge.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B0_runOnce_merge.sv"
+add_fileset_file "zfp_1d_1block_B0_runOnce_merge_storage.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B0_runOnce_merge_storage.sv"
+add_fileset_file "zfp_1d_1block_bb_B1_start.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B1_start.sv"
+add_fileset_file "zfp_1d_1block_bb_B1_start_stall_region.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B1_start_stall_region.sv"
+add_fileset_file "zfp_1d_1block_i_iord_bl_call_unnamed_zfp0000lock1_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_iord_bl_call_unnamed_zfp0000lock1_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_pop_throttle_i1_throttle_pop_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_pop_throttle_i1_throttle_pop_0.sv"
+add_fileset_file "zfp_1d_1block_i_sfc_s_c0_in_wt_entry_s_c0_enter1_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_sfc_s_c0_in_wt_entry_s_c0_enter1_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0000_exit_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0000_exit_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0000block1_full_detector.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0000block1_full_detector.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_00001d_1block1_data_fifo.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_00001d_1block1_data_fifo.sv"
+add_fileset_file "zfp_1d_1block_i_sfc_logic_s_c0_in_wt_ent0000nter1_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_sfc_logic_s_c0_in_wt_ent0000nter1_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_dummy_thread_b0000dummy_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_dummy_thread_b0000dummy_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_forked_b1_start_forked_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_forked_b1_start_forked_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_pipeline_keep_going21_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_pipeline_keep_going21_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_push_i1_notexitcond22_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_push_i1_notexitcond22_0.sv"
+add_fileset_file "zfp_1d_1block_B1_start_branch.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B1_start_branch.sv"
+add_fileset_file "zfp_1d_1block_B1_start_merge.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B1_start_merge.sv"
+add_fileset_file "zfp_1d_1block_B1_start_merge_storage.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B1_start_merge_storage.sv"
+add_fileset_file "zfp_1d_1block_bb_B2.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B2.sv"
+add_fileset_file "zfp_1d_1block_bb_B2_stall_region.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B2_stall_region.sv"
+add_fileset_file "zfp_1d_1block_i_sfc_s_c0_in_for_cond_cle0000ter25_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_sfc_s_c0_in_for_cond_cle0000ter25_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0000xit26_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0000xit26_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0001block1_full_detector.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0001block1_full_detector.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_00011d_1block1_data_fifo.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_00011d_1block1_data_fifo.sv"
+add_fileset_file "zfp_1d_1block_i_sfc_logic_s_c0_in_for_co0000ter25_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_sfc_logic_s_c0_in_for_co0000ter25_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_spec_select10_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_spec_select10_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_spec_select11_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_spec_select11_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_spec_select2112_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_spec_select2112_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_spec_select2213_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_spec_select2213_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_spec_select2214_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_spec_select2214_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_unnamed_3_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_unnamed_3_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000med_4_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000med_4_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000med_5_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000med_5_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000med_6_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000med_6_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000med_7_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000med_7_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_B2_branch.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B2_branch.sv"
+add_fileset_file "zfp_1d_1block_B2_merge.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B2_merge.sv"
+add_fileset_file "zfp_1d_1block_B2_merge_storage.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B2_merge_storage.sv"
+add_fileset_file "zfp_1d_1block_bb_B3.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B3.sv"
+add_fileset_file "zfp_1d_1block_bb_B3_stall_region.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B3_stall_region.sv"
+add_fileset_file "zfp_1d_1block_i_iord_bl_in_stream_unnamed_10_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_iord_bl_in_stream_unnamed_10_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_sfc_s_c0_in_for_body_s_c0000er272_zfp_1d_1block1.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_sfc_s_c0_in_for_body_s_c0000er272_zfp_1d_1block1.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0000xit29_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0000xit29_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0002block1_full_detector.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0002block1_full_detector.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_00021d_1block1_data_fifo.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_00021d_1block1_data_fifo.sv"
+add_fileset_file "zfp_1d_1block_i_sfc_logic_s_c0_in_for_bo0000er272_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_sfc_logic_s_c0_in_for_bo0000er272_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_dummy_thread_b3_dummy_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_dummy_thread_b3_dummy_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_forked_b3_forked_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_forked_b3_forked_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_pipeline_keep_going17_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_pipeline_keep_going17_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_push_i1_notexitcond18_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_push_i1_notexitcond18_0.sv"
+add_fileset_file "zfp_1d_1block_i_sfc_s_c1_in_for_body_s_c1_enter_zfp_1d_1block5.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_sfc_s_c1_in_for_body_s_c1_enter_zfp_1d_1block5.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c1_0000_exit_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c1_0000_exit_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c1_0000block1_full_detector.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c1_0000block1_full_detector.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c1_00001d_1block1_data_fifo.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c1_00001d_1block1_data_fifo.sv"
+add_fileset_file "zfp_1d_1block_i_sfc_logic_s_c1_in_for_bo0000enter_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_sfc_logic_s_c1_in_for_bo0000enter_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000ed_11_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000ed_11_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000ed_12_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000ed_12_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000ed_13_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000ed_13_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000ed_14_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000ed_14_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_B3_branch.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B3_branch.sv"
+add_fileset_file "zfp_1d_1block_B3_merge.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B3_merge.sv"
+add_fileset_file "zfp_1d_1block_B3_merge_storage.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B3_merge_storage.sv"
+add_fileset_file "zfp_1d_1block_bb_B4.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B4.sv"
+add_fileset_file "zfp_1d_1block_bb_B4_stall_region.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B4_stall_region.sv"
+add_fileset_file "zfp_1d_1block_i_iowr_bl_out_stream_unnamed_18_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_iowr_bl_out_stream_unnamed_18_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_sfc_s_c0_in_for_body5_s_0000er323_zfp_1d_1block1.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_sfc_s_c0_in_for_body5_s_0000er323_zfp_1d_1block1.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0000xit37_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0000xit37_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0003block1_full_detector.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0003block1_full_detector.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_00031d_1block1_data_fifo.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_00031d_1block1_data_fifo.sv"
+add_fileset_file "zfp_1d_1block_i_sfc_logic_s_c0_in_for_bo0000er323_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_sfc_logic_s_c0_in_for_bo0000er323_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_dummy_thread_b4_dummy_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_dummy_thread_b4_dummy_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_add10_i6_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_add10_i6_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_add11_i7_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_add11_i7_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_sub13_i8_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_sub13_i8_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_sub15_i9_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_sub15_i9_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_forked_b4_forked_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_forked_b4_forked_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_pipeline_keep_going_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_pipeline_keep_going_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_push_i1_notexitcond_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_push_i1_notexitcond_0.sv"
+add_fileset_file "zfp_1d_1block_B4_branch.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B4_branch.sv"
+add_fileset_file "zfp_1d_1block_B4_merge.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B4_merge.sv"
+add_fileset_file "zfp_1d_1block_B4_merge_storage.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B4_merge_storage.sv"
+add_fileset_file "zfp_1d_1block_bb_B5.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B5.sv"
+add_fileset_file "zfp_1d_1block_bb_B5_stall_region.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B5_stall_region.sv"
+add_fileset_file "zfp_1d_1block_i_iowr_bl_return_unnamed_z0000ock19_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_iowr_bl_return_unnamed_z0000ock19_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_push_token_i1_throttle_push_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_push_token_i1_throttle_push_0.sv"
+add_fileset_file "zfp_1d_1block_B5_branch.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B5_branch.sv"
+add_fileset_file "zfp_1d_1block_B5_merge.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B5_merge.sv"
+add_fileset_file "zfp_1d_1block_B5_merge_storage.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B5_merge_storage.sv"
+add_fileset_file "zfp_1d_1block_internal.v" SYSTEM_VERILOG PATH "zfp_1d_1block_internal.v"
+
+#### Simulation fileset
+add_fileset SIM_VERILOG SIM_VERILOG "" ""
+set_fileset_property SIM_VERILOG TOP_LEVEL zfp_1d_1block_internal
+set_fileset_property SIM_VERILOG ENABLE_RELATIVE_INCLUDE_PATHS false
+add_fileset_file "acl_reset_handler.sv" SYSTEM_VERILOG PATH "ip/acl_reset_handler.sv"
+add_fileset_file "dspba_library_ver.sv" SYSTEM_VERILOG PATH "linux64/lib/hld_backend/Libraries/sv/base/dspba_library_ver.sv"
+add_fileset_file "acl_ecc_pkg.sv" SYSTEM_VERILOG PATH "ip/acl_ecc_pkg.sv"
+add_fileset_file "acl_data_fifo.v" SYSTEM_VERILOG PATH "ip/acl_data_fifo.v"
+add_fileset_file "acl_fifo.v" SYSTEM_VERILOG PATH "ip/acl_fifo.v"
+add_fileset_file "acl_altera_syncram_wrapped.sv" SYSTEM_VERILOG PATH "ip/acl_altera_syncram_wrapped.sv"
+add_fileset_file "acl_scfifo_wrapped.sv" SYSTEM_VERILOG PATH "ip/acl_scfifo_wrapped.sv"
+add_fileset_file "acl_ecc_decoder.sv" SYSTEM_VERILOG PATH "ip/acl_ecc_decoder.sv"
+add_fileset_file "acl_ecc_encoder.sv" SYSTEM_VERILOG PATH "ip/acl_ecc_encoder.sv"
+add_fileset_file "acl_ll_fifo.v" SYSTEM_VERILOG PATH "ip/acl_ll_fifo.v"
+add_fileset_file "acl_ll_ram_fifo.v" SYSTEM_VERILOG PATH "ip/acl_ll_ram_fifo.v"
+add_fileset_file "acl_valid_fifo_counter.v" SYSTEM_VERILOG PATH "ip/acl_valid_fifo_counter.v"
+add_fileset_file "acl_dspba_valid_fifo_counter.v" SYSTEM_VERILOG PATH "ip/acl_dspba_valid_fifo_counter.v"
+add_fileset_file "acl_staging_reg.v" SYSTEM_VERILOG PATH "ip/acl_staging_reg.v"
+add_fileset_file "hld_fifo.sv" SYSTEM_VERILOG PATH "ip/hld_fifo.sv"
+add_fileset_file "acl_mid_speed_fifo.sv" SYSTEM_VERILOG PATH "ip/acl_mid_speed_fifo.sv"
+add_fileset_file "acl_latency_one_ram_fifo.sv" SYSTEM_VERILOG PATH "ip/acl_latency_one_ram_fifo.sv"
+add_fileset_file "acl_latency_zero_ram_fifo.sv" SYSTEM_VERILOG PATH "ip/acl_latency_zero_ram_fifo.sv"
+add_fileset_file "hld_fifo_zero_width.sv" SYSTEM_VERILOG PATH "ip/hld_fifo_zero_width.sv"
+add_fileset_file "acl_high_speed_fifo.sv" SYSTEM_VERILOG PATH "ip/acl_high_speed_fifo.sv"
+add_fileset_file "acl_low_latency_fifo.sv" SYSTEM_VERILOG PATH "ip/acl_low_latency_fifo.sv"
+add_fileset_file "acl_zero_latency_fifo.sv" SYSTEM_VERILOG PATH "ip/acl_zero_latency_fifo.sv"
+add_fileset_file "acl_fanout_pipeline.sv" SYSTEM_VERILOG PATH "ip/acl_fanout_pipeline.sv"
+add_fileset_file "acl_std_synchronizer_nocut.v" SYSTEM_VERILOG PATH "ip/acl_std_synchronizer_nocut.v"
+add_fileset_file "acl_tessellated_incr_decr_threshold.sv" SYSTEM_VERILOG PATH "ip/acl_tessellated_incr_decr_threshold.sv"
+add_fileset_file "acl_tessellated_incr_lookahead.sv" SYSTEM_VERILOG PATH "ip/acl_tessellated_incr_lookahead.sv"
+add_fileset_file "acl_lfsr.sv" SYSTEM_VERILOG PATH "ip/acl_lfsr.sv"
+add_fileset_file "acl_mlab_fifo.sv" SYSTEM_VERILOG PATH "ip/acl_mlab_fifo.sv"
+add_fileset_file "acl_parameter_assert.svh" SYSTEM_VERILOG PATH "ip/acl_parameter_assert.svh"
+add_fileset_file "acl_pop_stall_latency.sv" SYSTEM_VERILOG PATH "ip/acl_pop_stall_latency.sv"
+add_fileset_file "acl_sync.sv" SYSTEM_VERILOG PATH "ip/acl_sync.sv"
+add_fileset_file "acl_desync.sv" SYSTEM_VERILOG PATH "ip/acl_desync.sv"
+add_fileset_file "acl_push_stall_latency.sv" SYSTEM_VERILOG PATH "ip/acl_push_stall_latency.sv"
+add_fileset_file "acl_dspba_buffer.v" SYSTEM_VERILOG PATH "ip/acl_dspba_buffer.v"
+add_fileset_file "acl_fast_pipeline.v" SYSTEM_VERILOG PATH "ip/acl_fast_pipeline.v"
+add_fileset_file "acl_push.v" SYSTEM_VERILOG PATH "ip/acl_push.v"
+add_fileset_file "acl_token_fifo_counter.v" SYSTEM_VERILOG PATH "ip/acl_token_fifo_counter.v"
+add_fileset_file "acl_full_detector.v" SYSTEM_VERILOG PATH "ip/acl_full_detector.v"
+add_fileset_file "acl_tessellated_incr_decr_decr.sv" SYSTEM_VERILOG PATH "ip/acl_tessellated_incr_decr_decr.sv"
+add_fileset_file "acl_loop_admit.sv" SYSTEM_VERILOG PATH "ip/acl_loop_admit.sv"
+add_fileset_file "acl_shift_register_no_reset_dont_merge.sv" SYSTEM_VERILOG PATH "ip/acl_shift_register_no_reset_dont_merge.sv"
+add_fileset_file "hld_memory_depth_quantization_pkg.sv" SYSTEM_VERILOG PATH "ip/hld_memory_depth_quantization_pkg.sv"
+add_fileset_file "hld_iord.sv" SYSTEM_VERILOG PATH "ip/hld_iord.sv"
+add_fileset_file "hld_iord_stall_latency.sv" SYSTEM_VERILOG PATH "ip/hld_iord_stall_latency.sv"
+add_fileset_file "hld_iord_stall_valid.sv" SYSTEM_VERILOG PATH "ip/hld_iord_stall_valid.sv"
+add_fileset_file "acl_shift_register_no_reset.sv" SYSTEM_VERILOG PATH "ip/acl_shift_register_no_reset.sv"
+add_fileset_file "acl_ffwddst.sv" SYSTEM_VERILOG PATH "ip/acl_ffwddst.sv"
+add_fileset_file "acl_ffwdsrc.v" SYSTEM_VERILOG PATH "ip/acl_ffwdsrc.v"
+add_fileset_file "ternary_add.v" SYSTEM_VERILOG PATH "ip/ternary_add.v"
+add_fileset_file "six_three_comp.v" SYSTEM_VERILOG PATH "ip/six_three_comp.v"
+add_fileset_file "acl_popcount.sv" SYSTEM_VERILOG PATH "ip/acl_popcount.sv"
+add_fileset_file "hld_iowr.sv" SYSTEM_VERILOG PATH "ip/hld_iowr.sv"
+add_fileset_file "hld_iowr_stall_latency.sv" SYSTEM_VERILOG PATH "ip/hld_iowr_stall_latency.sv"
+add_fileset_file "hld_iowr_stall_valid.sv" SYSTEM_VERILOG PATH "ip/hld_iowr_stall_valid.sv"
+add_fileset_file "hld_loop_profiler.sv" SYSTEM_VERILOG PATH "ip/hld_loop_profiler.sv"
+add_fileset_file "hld_sim_latency_tracker.sv" SYSTEM_VERILOG PATH "ip/hld_sim_latency_tracker.sv"
+add_fileset_file "zfp_1d_1block_function_wrapper.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_function_wrapper.sv"
+add_fileset_file "zfp_1d_1block_start_pulse.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_start_pulse.sv"
+add_fileset_file "zfp_1d_1block_wait_pulse_extender_inst.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_wait_pulse_extender_inst.sv"
+add_fileset_file "zfp_1d_1block_function.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_function.sv"
+add_fileset_file "zfp_1d_1block_bb_B0_runOnce.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B0_runOnce.sv"
+add_fileset_file "zfp_1d_1block_bb_B0_runOnce_stall_region.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B0_runOnce_stall_region.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_pop_token_i1_wt_limpop_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_pop_token_i1_wt_limpop_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_push_token_i1_wt_limpush_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_push_token_i1_wt_limpush_0.sv"
+add_fileset_file "zfp_1d_1block_B0_runOnce_branch.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B0_runOnce_branch.sv"
+add_fileset_file "zfp_1d_1block_B0_runOnce_merge.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B0_runOnce_merge.sv"
+add_fileset_file "zfp_1d_1block_B0_runOnce_merge_storage.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B0_runOnce_merge_storage.sv"
+add_fileset_file "zfp_1d_1block_bb_B1_start.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B1_start.sv"
+add_fileset_file "zfp_1d_1block_bb_B1_start_stall_region.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B1_start_stall_region.sv"
+add_fileset_file "zfp_1d_1block_i_iord_bl_call_unnamed_zfp0000lock1_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_iord_bl_call_unnamed_zfp0000lock1_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_pop_throttle_i1_throttle_pop_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_pop_throttle_i1_throttle_pop_0.sv"
+add_fileset_file "zfp_1d_1block_i_sfc_s_c0_in_wt_entry_s_c0_enter1_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_sfc_s_c0_in_wt_entry_s_c0_enter1_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0000_exit_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0000_exit_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0000block1_full_detector.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0000block1_full_detector.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_00001d_1block1_data_fifo.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_00001d_1block1_data_fifo.sv"
+add_fileset_file "zfp_1d_1block_i_sfc_logic_s_c0_in_wt_ent0000nter1_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_sfc_logic_s_c0_in_wt_ent0000nter1_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_dummy_thread_b0000dummy_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_dummy_thread_b0000dummy_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_forked_b1_start_forked_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_forked_b1_start_forked_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_pipeline_keep_going21_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_pipeline_keep_going21_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_push_i1_notexitcond22_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_push_i1_notexitcond22_0.sv"
+add_fileset_file "zfp_1d_1block_B1_start_branch.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B1_start_branch.sv"
+add_fileset_file "zfp_1d_1block_B1_start_merge.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B1_start_merge.sv"
+add_fileset_file "zfp_1d_1block_B1_start_merge_storage.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B1_start_merge_storage.sv"
+add_fileset_file "zfp_1d_1block_bb_B2.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B2.sv"
+add_fileset_file "zfp_1d_1block_bb_B2_stall_region.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B2_stall_region.sv"
+add_fileset_file "zfp_1d_1block_i_sfc_s_c0_in_for_cond_cle0000ter25_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_sfc_s_c0_in_for_cond_cle0000ter25_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0000xit26_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0000xit26_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0001block1_full_detector.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0001block1_full_detector.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_00011d_1block1_data_fifo.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_00011d_1block1_data_fifo.sv"
+add_fileset_file "zfp_1d_1block_i_sfc_logic_s_c0_in_for_co0000ter25_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_sfc_logic_s_c0_in_for_co0000ter25_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_spec_select10_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_spec_select10_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_spec_select11_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_spec_select11_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_spec_select2112_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_spec_select2112_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_spec_select2213_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_spec_select2213_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_spec_select2214_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_spec_select2214_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_unnamed_3_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_unnamed_3_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000med_4_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000med_4_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000med_5_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000med_5_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000med_6_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000med_6_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000med_7_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000med_7_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_B2_branch.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B2_branch.sv"
+add_fileset_file "zfp_1d_1block_B2_merge.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B2_merge.sv"
+add_fileset_file "zfp_1d_1block_B2_merge_storage.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B2_merge_storage.sv"
+add_fileset_file "zfp_1d_1block_bb_B3.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B3.sv"
+add_fileset_file "zfp_1d_1block_bb_B3_stall_region.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B3_stall_region.sv"
+add_fileset_file "zfp_1d_1block_i_iord_bl_in_stream_unnamed_10_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_iord_bl_in_stream_unnamed_10_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_sfc_s_c0_in_for_body_s_c0000er272_zfp_1d_1block1.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_sfc_s_c0_in_for_body_s_c0000er272_zfp_1d_1block1.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0000xit29_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0000xit29_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0002block1_full_detector.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0002block1_full_detector.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_00021d_1block1_data_fifo.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_00021d_1block1_data_fifo.sv"
+add_fileset_file "zfp_1d_1block_i_sfc_logic_s_c0_in_for_bo0000er272_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_sfc_logic_s_c0_in_for_bo0000er272_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_dummy_thread_b3_dummy_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_dummy_thread_b3_dummy_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_forked_b3_forked_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_forked_b3_forked_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_pipeline_keep_going17_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_pipeline_keep_going17_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_push_i1_notexitcond18_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_push_i1_notexitcond18_0.sv"
+add_fileset_file "zfp_1d_1block_i_sfc_s_c1_in_for_body_s_c1_enter_zfp_1d_1block5.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_sfc_s_c1_in_for_body_s_c1_enter_zfp_1d_1block5.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c1_0000_exit_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c1_0000_exit_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c1_0000block1_full_detector.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c1_0000block1_full_detector.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c1_00001d_1block1_data_fifo.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c1_00001d_1block1_data_fifo.sv"
+add_fileset_file "zfp_1d_1block_i_sfc_logic_s_c1_in_for_bo0000enter_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_sfc_logic_s_c1_in_for_bo0000enter_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000ed_11_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000ed_11_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000ed_12_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000ed_12_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000ed_13_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000ed_13_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000ed_14_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_source_i60000ed_14_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_B3_branch.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B3_branch.sv"
+add_fileset_file "zfp_1d_1block_B3_merge.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B3_merge.sv"
+add_fileset_file "zfp_1d_1block_B3_merge_storage.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B3_merge_storage.sv"
+add_fileset_file "zfp_1d_1block_bb_B4.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B4.sv"
+add_fileset_file "zfp_1d_1block_bb_B4_stall_region.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B4_stall_region.sv"
+add_fileset_file "zfp_1d_1block_i_iowr_bl_out_stream_unnamed_18_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_iowr_bl_out_stream_unnamed_18_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_sfc_s_c0_in_for_body5_s_0000er323_zfp_1d_1block1.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_sfc_s_c0_in_for_body5_s_0000er323_zfp_1d_1block1.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0000xit37_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0000xit37_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0003block1_full_detector.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_0003block1_full_detector.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_00031d_1block1_data_fifo.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_sfc_exit_s_c0_00031d_1block1_data_fifo.sv"
+add_fileset_file "zfp_1d_1block_i_sfc_logic_s_c0_in_for_bo0000er323_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_sfc_logic_s_c0_in_for_bo0000er323_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_dummy_thread_b4_dummy_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_dummy_thread_b4_dummy_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_add10_i6_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_add10_i6_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_add11_i7_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_add11_i7_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_sub13_i8_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_sub13_i8_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_sub15_i9_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_ffwd_dest_i64_sub15_i9_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_forked_b4_forked_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_forked_b4_forked_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_pipeline_keep_going_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_pipeline_keep_going_0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_push_i1_notexitcond_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_push_i1_notexitcond_0.sv"
+add_fileset_file "zfp_1d_1block_B4_branch.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B4_branch.sv"
+add_fileset_file "zfp_1d_1block_B4_merge.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B4_merge.sv"
+add_fileset_file "zfp_1d_1block_B4_merge_storage.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B4_merge_storage.sv"
+add_fileset_file "zfp_1d_1block_bb_B5.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B5.sv"
+add_fileset_file "zfp_1d_1block_bb_B5_stall_region.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_bb_B5_stall_region.sv"
+add_fileset_file "zfp_1d_1block_i_iowr_bl_return_unnamed_z0000ock19_zfp_1d_1block0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_iowr_bl_return_unnamed_z0000ock19_zfp_1d_1block0.sv"
+add_fileset_file "zfp_1d_1block_i_llvm_fpga_push_token_i1_throttle_push_0.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_i_llvm_fpga_push_token_i1_throttle_push_0.sv"
+add_fileset_file "zfp_1d_1block_B5_branch.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B5_branch.sv"
+add_fileset_file "zfp_1d_1block_B5_merge.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B5_merge.sv"
+add_fileset_file "zfp_1d_1block_B5_merge_storage.sv" SYSTEM_VERILOG PATH "ip/zfp_1d_1block_B5_merge_storage.sv"
+add_fileset_file "zfp_1d_1block_internal.v" SYSTEM_VERILOG PATH "zfp_1d_1block_internal.v"
+
+#### Primary clock for the component
+add_interface clock clock end
+set_interface_property clock ENABLED true
+set_interface_assignment clock hls.cosim.name {$clock}
+add_interface_port clock clock clk input 1
+
+#### Primary reset for the component
+add_interface reset reset end
+set_interface_property reset associatedClock clock
+set_interface_assignment reset hls.cosim.name {$reset}
+add_interface_port reset resetn reset_n input 1
+
+#### Streaming interface for in_stream
+add_interface in_stream avalon_streaming sink
+set_interface_property in_stream associatedClock clock
+set_interface_property in_stream associatedReset reset
+set_interface_property in_stream maxChannel 0
+set_interface_property in_stream readyLatency 0
+set_interface_property in_stream dataBitsPerSymbol 64
+set_interface_property in_stream symbolsPerBeat 1
+set_interface_property in_stream firstSymbolInHighOrderBits 0
+set_interface_assignment in_stream hls.cosim.name {in_stream}
+add_interface_port in_stream in_stream_data data input 64
+add_interface_port in_stream in_stream_ready ready output 1
+add_interface_port in_stream in_stream_valid valid input 1
+
+#### Streaming interface for out_stream
+add_interface out_stream avalon_streaming source
+set_interface_property out_stream associatedClock clock
+set_interface_property out_stream associatedReset reset
+set_interface_property out_stream maxChannel 0
+set_interface_property out_stream readyLatency 0
+set_interface_property out_stream dataBitsPerSymbol 64
+set_interface_property out_stream symbolsPerBeat 1
+set_interface_property out_stream firstSymbolInHighOrderBits 0
+set_interface_assignment out_stream hls.cosim.name {out_stream}
+add_interface_port out_stream out_stream_data data output 64
+add_interface_port out_stream out_stream_ready ready input 1
+add_interface_port out_stream out_stream_valid valid output 1
+
+#### The component invocation protocol interface (call)
+add_interface call conduit sink
+set_interface_property call associatedClock clock
+set_interface_property call associatedReset reset
+set_interface_assignment call hls.cosim.name {$call}
+add_interface_port call start valid input 1
+add_interface_port call busy stall output 1
+
+#### The component return protocol interface (return)
+add_interface return conduit source
+set_interface_property return associatedClock clock
+set_interface_property return associatedReset reset
+set_interface_assignment return hls.cosim.name {$return}
+add_interface_port return done valid output 1
+add_interface_port return stall stall input 1
+
+#### Quartus settings (QIP strings)
+set_qip_strings { "set_instance_assignment -entity \"%entityName%\" -library \"%libraryName%\" -name AUTO_SHIFT_REGISTER_RECOGNITION OFF -to *_NO_SHIFT_REG*"  }

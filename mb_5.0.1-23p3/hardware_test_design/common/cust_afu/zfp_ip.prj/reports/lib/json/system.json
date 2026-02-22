@@ -1,0 +1,253 @@
+{
+  "nodes":
+  [
+    {
+      "name":"zfp_1d_decompress"
+      , "id":20492728
+      , "type":"component"
+      , "children":
+      [
+        {
+          "name":"Stream Write"
+          , "id":21473392
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Basic Block":"zfp_1d_decompress.B9"
+              , "Width":"1 bit"
+              , "Depth":"0"
+              , "Stall-free":"No"
+              , "Latency":"0"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                , "line":259
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Stream Read"
+          , "id":21138392
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Basic Block":"zfp_1d_decompress.B3"
+              , "Width":"64 bits"
+              , "Depth":"0"
+              , "Stall-free":"No"
+              , "Latency":"0"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                , "line":24
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Stream Read"
+          , "id":21097464
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Basic Block":"zfp_1d_decompress.B4"
+              , "Width":"64 bits"
+              , "Depth":"0"
+              , "Stall-free":"No"
+              , "Latency":"0"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/fast-lab-share/lifan3/zfp/zhw/src/./hls_stream.h"
+                , "line":24
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Stream Write"
+          , "id":20619480
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Basic Block":"zfp_1d_decompress.B8"
+              , "Width":"64 bits"
+              , "Depth":"0"
+              , "Stall-free":"No"
+              , "Latency":"0"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                , "line":257
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Stream Read"
+          , "id":19648944
+          , "details":
+          [
+            {
+              "type":"table"
+              , "Basic Block":"zfp_1d_decompress.B1.start"
+              , "Width":"1 bit"
+              , "Depth":"0"
+              , "Stall-free":"No"
+              , "Latency":"0"
+            }
+          ]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/fast-lab-share/lifan3/zfp/zhw/src/zfp_1d_decompress.cpp"
+                , "line":230
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+    }
+    , {
+      "name":"call.zfp_1d_decompress"
+      , "id":20775152
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Width":"1 bit"
+          , "Depth":"0"
+          , "Ready Latency":"0"
+          , "Bits per Symbol":"1 bit"
+          , "Uses Packets":"No"
+          , "Uses Valid":"Yes"
+          , "Uses Empty":"No"
+          , "First symbol in high order bits":"No"
+        }
+      ]
+      , "type":"stream"
+    }
+    , {
+      "name":"return.zfp_1d_decompress"
+      , "id":20777440
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Width":"1 bit"
+          , "Depth":"0"
+          , "Ready Latency":"0"
+          , "Bits per Symbol":"1 bit"
+          , "Uses Packets":"No"
+          , "Uses Ready":"Yes"
+          , "Uses Empty":"No"
+          , "First symbol in high order bits":"No"
+        }
+      ]
+      , "type":"stream"
+    }
+    , {
+      "name":"in_stream"
+      , "id":21223632
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Width":"64 bits"
+          , "Depth":"0"
+          , "Ready Latency":"0"
+          , "Bits per Symbol":"64 bits"
+          , "Uses Packets":"No"
+          , "Uses Valid":"Yes"
+          , "Uses Empty":"No"
+          , "First symbol in high order bits":"No"
+        }
+      ]
+      , "type":"stream"
+    }
+    , {
+      "name":"out_stream"
+      , "id":21223672
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Width":"64 bits"
+          , "Depth":"0"
+          , "Ready Latency":"0"
+          , "Bits per Symbol":"64 bits"
+          , "Uses Packets":"No"
+          , "Uses Ready":"Yes"
+          , "Uses Empty":"No"
+          , "First symbol in high order bits":"No"
+        }
+      ]
+      , "type":"stream"
+    }
+  ]
+  , "links":
+  [
+    {
+      "from":20775152
+      , "to":19648944
+    }
+    , {
+      "from":21473392
+      , "to":20777440
+    }
+    , {
+      "from":21223632
+      , "to":21138392
+    }
+    , {
+      "from":21223632
+      , "to":21097464
+    }
+    , {
+      "from":20619480
+      , "to":21223672
+    }
+    , {
+      "from":21138392
+      , "to":21473392
+    }
+    , {
+      "from":19648944
+      , "to":21473392
+    }
+    , {
+      "from":20619480
+      , "to":21473392
+    }
+    , {
+      "from":21097464
+      , "to":21473392
+    }
+  ]
+}
