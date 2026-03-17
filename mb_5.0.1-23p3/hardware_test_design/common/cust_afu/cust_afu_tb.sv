@@ -80,7 +80,7 @@ module cust_afu_tb;
     logic [7:0] mem_data [0:65535]; // 64KB buffer
     initial begin
         integer fd, code;
-        fd = $fopen("/fast-lab-share/lifan3/zfp/zhw/test/test_data/gold_results_data/nyx/NYX-4x4096_2D_rate_8.zfp", "rb");
+        fd = $fopen("/fast-lab-share/lifan3/zfp/zhw/src/sift_compressed.zfp", "rb");
         if (fd == 0) begin
             $display("ERROR: Could not open golden data file!");
             $finish;
@@ -143,6 +143,14 @@ module cust_afu_tb;
             wready <= 1;
             
             if (wvalid && wready && wlast) begin
+                integer dout;
+                dout = $fopen("zfp_output.hex", "a");
+                $fdisplay(dout, "%08x %08x %08x %08x %08x %08x %08x %08x %08x %08x %08x %08x %08x %08x %08x %08x", 
+                        wdata[31:0], wdata[63:32], wdata[95:64], wdata[127:96],
+                        wdata[159:128], wdata[191:160], wdata[223:192], wdata[255:224],
+                        wdata[287:256], wdata[319:288], wdata[351:320], wdata[383:352],
+                        wdata[415:384], wdata[447:416], wdata[479:448], wdata[511:480]);
+                $fclose(dout);
                 fork
                     begin
                         repeat(2) @(posedge clk);
@@ -190,8 +198,8 @@ module cust_afu_tb;
         rst_n = 1'b0;
         #2000;
         rst_n = 1'b1;
-        // Force unconnected port in zfp_decode to 0
-        force dut.psedu_read_write_inst.decode_inst.zfp_decode_internal_inst.zfp_decode_internal.avst_iord_bl_call_zfp_decode_data = 1'b0;
+        // Force unconnected call data port in monolithic fp32 IP
+        // force dut.psedu_read_write_inst.zfp_f32_inst.zfp_1d_decompress_f32_internal_inst.zfp_1d_decompress_f32_internal.avst_iord_bl_call_zfp_1d_decompress_f32_data = 1'b0;
         #2000;
         
         $display("--- Starting ZFP Per-Stage Latency Test ---");
@@ -199,11 +207,9 @@ module cust_afu_tb;
         // 1. Configure Test Case 20 (ZFP)
         csr_wr(22'h0018, 64'd20); // CSR_TEST_CASE
         
-        // 2. Configure Num Requests (256 cache lines = 16384 bytes / 64 bytes)
-        // Full dataset: 16384 bytes / 64 bytes per cache line = 256 iterations
-        // Each iteration processes 2 ZFP blocks (512 total)
-        csr_wr(22'h0058, 64'd256);  // CSR_NUM_REQUEST = 256 cache lines
-        
+        // 2. Configure Num Requests
+        // Running 8 cachelines (128 floats = 1 SIFT vector) to avoid ModelSim Starter Edition timeout
+        csr_wr(22'h0058, 64'd8);  // CSR_NUM_REQUEST = 8 cache lines
         // 3. Configure Dst Addr
         csr_wr(22'h0050, 64'hB0000000); // CSR_DST (mapped to seed_init)
         
@@ -212,21 +218,24 @@ module cust_afu_tb;
         
         $display("--- ZFP Process Started ---");
         
-        // Wait for Completion
-        // #500000; 
-        
+        // Wait for Completion by polling the state machine directly
         begin
             int timeout;
-            for (timeout = 0; timeout < 2000000; timeout++) begin
-                @(posedge clk);
-                if (timeout % 1000 == 0) begin
-                     $display("TB INFO: Timeout Counter: %0d", timeout);
+            for (timeout = 0; timeout < 500000; timeout++) begin
+                if (dut.psedu_read_write_inst.wr_cnt == 64'd8) begin // All 8 cachelines (128 floats) written
+                    $display("TB INFO: Process completed at timeout counter: %0d", timeout);
+                    break;
                 end
+                // Wait sometime before polling again
+                #(100); // 10 clock cycles delay (100ns)
+            end
+            if (timeout == 50000) begin
+                $display("TB ERROR: Process timed out unconditionally!");
             end
         end
         
         // Read Overall Latency
-        csr_rd(22'h0010, lat); // CSR_DELAY (from cal_delay)
+        csr_rd(22'h0010, lat); // Read final latency again just to be safe
         
         // Read Per-Stage Latencies
         csr_rd(22'h0068, lat_s1); // Decode (bit-plane)
@@ -235,14 +244,12 @@ module cust_afu_tb;
 
         $display("");
         $display("============================================");
-        $display("  ZFP Decompression Latency Report");
+        $display("  ZFP FP32 Decompression Latency Report (SIFT)");
         $display("============================================");
-        $display("  Overall (AXI):   %0d cycles", lat);
-        $display("  ------------  Per-Stage Breakdown  ------");
-        $display("  Decode:          %0d cycles", lat_s1);
-        $display("  Uint-to-Int:     %0d cycles", lat_s2);
-        $display("  Inv Lift:        %0d cycles", lat_s3);
-        $display("  Stage Sum:       %0d cycles", lat_s1 + lat_s2 + lat_s3);
+        $display("  Overall (AXI):      %0d cycles", lat);
+        $display("  Decode Stage:       %0d cycles", lat_s1);
+        $display("  Uint-to-Int Stage:  %0d cycles", lat_s2);
+        $display("  Inv Lift Stage:     %0d cycles", lat_s3);
         $display("============================================");
         
         if (lat > 0) 
@@ -253,4 +260,16 @@ module cust_afu_tb;
         $finish;
     end
 
+    // Cycle-accurate profiling for the final IP stage output
+    always_ff @(posedge dut.psedu_read_write_inst.axi4_mm_clk) begin
+        if (dut.psedu_read_write_inst.zfp_start_gated) begin
+            $display("TB DBG [%0t] zfp_start_gated PULSED!", $time);
+        end
+        if (dut.psedu_read_write_inst.zfp_out_valid && dut.psedu_read_write_inst.zfp_out_ready) begin
+            $display("TB DBG [%0t] zfp_out_valid=1, data=%h, current zfp_out_word_cnt=%0d", $time, dut.psedu_read_write_inst.zfp_out_data, dut.psedu_read_write_inst.zfp_out_word_cnt);
+        end
+        if (dut.psedu_read_write_inst.inv_done) begin
+            $display("TB DBG [%0t] inv_done PULSED!", $time);
+        end
+    end
 endmodule

@@ -107,161 +107,168 @@ module psedu_read_write (
     logic [63:0] random_offset_32M;
     logic [63:0] addr_offset;
     logic [63:0] rw_cnt;
+    logic [63:0] rd_cnt, wr_cnt;
     assign rready = 1'b1;
     assign bready = 1'b1;
     
-    // ZFP Signals
-    logic [63:0] zfp_in_data;
-    logic zfp_in_valid, zfp_in_ready;
-    logic [63:0] zfp_out_data;
+    // ZFP Signals (FP32: 32-bit data paths)
+    logic [31:0] zfp_in_data_real;  // From state machine
+    logic zfp_in_valid_real;        // From state machine
+    logic [31:0] zfp_out_data;
     logic zfp_out_valid, zfp_out_ready;
-    logic zfp_start, zfp_busy, zfp_done;
-    
+    logic zfp_busy, zfp_done;
+    logic zfp_in_ready;
+
     logic [511:0] rdata_buf;
     logic [511:0] wdata_buf;
-    logic [3:0] zfp_word_cnt;
+    logic [4:0] zfp_word_cnt; // max 16 for input
+    logic [4:0] zfp_out_word_cnt; // max 16 for output
 
     // Registers for driving address in ZFP mode
     logic [63:0] zfp_araddr_reg;
     logic [63:0] zfp_awaddr_reg;
 
     // ============================================================
-    // 3-Stage ZFP Pipeline: decode -> uint_to_int -> inv_lift
+    // Split FP32 ZFP IP (decode -> uint_to_int -> inv_lift)
     // ============================================================
 
-    // Inter-stage wiring: decode -> uint_to_int
-    logic [63:0] s1_out_data;
-    logic s1_out_valid, s1_out_ready;
-    logic s1_done;
+    // The HLS IP has a multi-stage internal reset chain (~145 cycles).
+    // busy = pos_reset | (not_ready & start), purely combinational.
+    // The start_pulse auto-fires on reset clear, starting the internal
+    // pipeline which first reads the call FIFO (needs start=1).
+    //
+    logic zfp_start_gated;
+    assign zfp_start_gated = (state != STATE_IDLE);
 
-    // Inter-stage wiring: uint_to_int -> inv_lift
-    logic [63:0] s2_out_data;
-    logic s2_out_valid, s2_out_ready;
-    logic s2_done;
+    logic [159:0] decode_to_u2i_data;
+    logic decode_to_u2i_valid, decode_to_u2i_ready;
+    logic [159:0] u2i_to_inv_data;
+    logic u2i_to_inv_valid, u2i_to_inv_ready;
 
-    logic s1_busy; // Added probe
+    logic decode_busy, decode_done;
+    logic u2i_busy, u2i_done;
+    logic inv_busy, inv_done;
 
-    logic zfp_start_r;
-    always_ff @(posedge axi4_mm_clk) zfp_start_r <= zfp_start;
-
-    // Stage 1: Bit-plane decode
-    zfp_decode decode_inst (
+    zfp_decode_f32 zfp_decode_inst (
         .clock(axi4_mm_clk),
         .resetn(axi4_mm_rst_n),
-        .in_stream_data(zfp_in_data),
-        .in_stream_valid(zfp_in_valid),
+        .in_stream_data(zfp_in_data_real),
+        .in_stream_valid(zfp_in_valid_real),
         .in_stream_ready(zfp_in_ready),
-        .out_stream_data(s1_out_data),
-        .out_stream_valid(s1_out_valid),
-        .out_stream_ready(s1_out_ready),
-        .start(zfp_start | zfp_start_r),
-        .busy(s1_busy),
-        .done(s1_done),
+        .out_stream_data(decode_to_u2i_data),
+        .out_stream_valid(decode_to_u2i_valid),
+        .out_stream_ready(decode_to_u2i_ready),
+        .start(zfp_start_gated),
+        .busy(decode_busy),
+        .done(decode_done),
         .stall(1'b0)
     );
 
-
-
-    // Stage 2: Uint-to-int conversion
-    zfp_uint_to_int u2i_inst (
+    zfp_uint_to_int_f32 zfp_u2i_inst (
         .clock(axi4_mm_clk),
         .resetn(axi4_mm_rst_n),
-        .in_stream_data(s1_out_data),
-        .in_stream_valid(s1_out_valid),
-        .in_stream_ready(s1_out_ready),
-        .out_stream_data(s2_out_data),
-        .out_stream_valid(s2_out_valid),
-        .out_stream_ready(s2_out_ready),
-        .start(s1_done),
-        .busy(),
-        .done(s2_done),
+        .in_stream_data(decode_to_u2i_data),
+        .in_stream_valid(decode_to_u2i_valid),
+        .in_stream_ready(decode_to_u2i_ready),
+        .out_stream_data(u2i_to_inv_data),
+        .out_stream_valid(u2i_to_inv_valid),
+        .out_stream_ready(u2i_to_inv_ready),
+        .start(zfp_start_gated),
+        .busy(u2i_busy),
+        .done(u2i_done),
         .stall(1'b0)
     );
 
-    // Stage 3: Inverse lifting transform
-    zfp_inv_lift invlift_inst (
+    zfp_inv_lift_f32 zfp_inv_lift_inst (
         .clock(axi4_mm_clk),
         .resetn(axi4_mm_rst_n),
-        .in_stream_data(s2_out_data),
-        .in_stream_valid(s2_out_valid),
-        .in_stream_ready(s2_out_ready),
+        .in_stream_data(u2i_to_inv_data),
+        .in_stream_valid(u2i_to_inv_valid),
+        .in_stream_ready(u2i_to_inv_ready),
         .out_stream_data(zfp_out_data),
         .out_stream_valid(zfp_out_valid),
         .out_stream_ready(zfp_out_ready),
-        .start(s2_done),
-        .busy(),
-        .done(zfp_done),
+        .start(zfp_start_gated),
+        .busy(inv_busy),
+        .done(inv_done),
         .stall(1'b0)
     );
 
-    // ============================================================
-    // Per-Stage Latency Counters
-    // ============================================================
-    // Free-running cycle counter (starts when processing begins)
-    logic [63:0] cycle_cnt;
-    logic [63:0] block_start_cycle;   // Snapshot at zfp_start
-    logic [63:0] s1_done_cycle;       // Snapshot at decode done
-    logic [63:0] s2_done_cycle;       // Snapshot at uint2int done
+    assign zfp_busy = decode_busy | u2i_busy | inv_busy;
+    assign zfp_done = inv_done; 
 
-    // Accumulated per-stage latency across all blocks
+    // DEBUG: Monitor Stream Handshakes internally
+    // synthesis translate_off
+    always_ff @(posedge axi4_mm_clk) begin
+        if (zfp_start_gated) begin
+            $display("RTL DBG [%0t] zfp_start asserted", $time);
+        end
+        if (decode_to_u2i_valid) begin
+            $display("RTL DBG [%0t] decode_to_u2i_valid=1, ready=%b", $time, decode_to_u2i_ready);
+        end
+        if (u2i_to_inv_valid) begin
+            $display("RTL DBG [%0t] u2i_to_inv_valid=1, ready=%b", $time, u2i_to_inv_ready);
+        end
+        if (zfp_out_valid) begin
+            $display("RTL DBG [%0t] zfp_out_valid=1, ready=%b", $time, zfp_out_ready);
+        end
+    end
+    // synthesis translate_on
+
+    // ============================================================
+    // Latency Counter (multi-stage)
+    // ============================================================
+    logic [63:0] cycle_cnt;
+    logic [63:0] block_start_cycle;
+    logic [63:0] decode_done_cycle;
+    logic [63:0] u2i_done_cycle;
+
+    // Accumulated total latency
     logic [63:0] lat_decode_acc;
-    logic [63:0] lat_uint2int_acc;
-    logic [63:0] lat_invlift_acc;
+    logic [63:0] lat_uint2int_acc; 
+    logic [63:0] lat_invlift_acc;  
 
     always_ff @(posedge axi4_mm_clk or negedge axi4_mm_rst_n) begin
         if (!axi4_mm_rst_n) begin
             cycle_cnt       <= '0;
             block_start_cycle <= '0;
-            s1_done_cycle   <= '0;
-            s2_done_cycle   <= '0;
+            decode_done_cycle <= '0;
+            u2i_done_cycle <= '0;
             lat_decode_acc  <= '0;
             lat_uint2int_acc <= '0;
             lat_invlift_acc <= '0;
         end else begin
             cycle_cnt <= cycle_cnt + 64'd1;
 
-            // Snapshot block start time
-            if (zfp_start) begin
+            if (zfp_start_gated) begin
                 block_start_cycle <= cycle_cnt;
-                $display("DBG_LAT [%0t] zfp_start: cycle_cnt=%0d", $time, cycle_cnt);
+                $display("DBG_LAT [%0t] zfp_start_gated: cycle_cnt=%0d", $time, cycle_cnt);
             end
 
-            // Snapshot and accumulate decode latency
-            if (s1_done) begin
-                s1_done_cycle  <= cycle_cnt;
+            if (decode_done) begin
+                decode_done_cycle <= cycle_cnt;
                 lat_decode_acc <= lat_decode_acc + (cycle_cnt - block_start_cycle);
-                $display("DBG_LAT [%0t] s1_done: cycle=%0d delta=%0d acc=%0d", $time, cycle_cnt, cycle_cnt - block_start_cycle, lat_decode_acc + (cycle_cnt - block_start_cycle));
+                $display("DBG_LAT [%0t] decode_done: delta=%0d", $time, cycle_cnt - block_start_cycle);
             end
 
-            // Snapshot and accumulate uint2int latency
-            if (s2_done) begin
-                s2_done_cycle    <= cycle_cnt;
-                lat_uint2int_acc <= lat_uint2int_acc + (cycle_cnt - s1_done_cycle);
-                $display("DBG_LAT [%0t] s2_done: cycle=%0d delta=%0d acc=%0d", $time, cycle_cnt, cycle_cnt - s1_done_cycle, lat_uint2int_acc + (cycle_cnt - s1_done_cycle));
+            if (u2i_done) begin
+                u2i_done_cycle <= cycle_cnt;
+                // Safely handle u2i finishing before decode_done registers in the edgecase
+                lat_uint2int_acc <= lat_uint2int_acc + (cycle_cnt - decode_done_cycle);
+                $display("DBG_LAT [%0t] u2i_done: delta=%0d", $time, cycle_cnt - decode_done_cycle);
             end
 
-            // Accumulate inv_lift latency
-            if (zfp_done) begin
-                lat_invlift_acc <= lat_invlift_acc + (cycle_cnt - s2_done_cycle);
-                $display("DBG_LAT [%0t] zfp_done: cycle=%0d delta=%0d acc=%0d", $time, cycle_cnt, cycle_cnt - s2_done_cycle, lat_invlift_acc + (cycle_cnt - s2_done_cycle));
+            if (inv_done) begin
+                lat_invlift_acc <= lat_invlift_acc + (cycle_cnt - u2i_done_cycle);
+                $display("DBG_LAT [%0t] inv_done: delta=%0d | total_block=%0d", $time, cycle_cnt - u2i_done_cycle, cycle_cnt - block_start_cycle);
             end
 
-            // Reset accumulators when a new test starts
             if (start_proc && test_case == 64'd20) begin
                 lat_decode_acc   <= '0;
                 lat_uint2int_acc <= '0;
                 lat_invlift_acc  <= '0;
                 cycle_cnt        <= '0;
                 $display("DBG_LAT [%0t] RESET accumulators (start_proc)", $time);
-            end
-
-            // Periodic heartbeat every 10000 cycles
-            if (cycle_cnt[6:0] == 7'd0 && cycle_cnt > 0) begin
-                $display("DBG_LAT [%0t] HEARTBEAT cycle=%0d | s1_done=%b s2_done=%b zfp_done=%b s1_busy=%b | valid=(%b,%b,%b,%b) ready=(%b,%b,%b,%b) | acc=(%0d,%0d,%0d)", 
-                         $time, cycle_cnt, s1_done, s2_done, zfp_done, s1_busy,
-                         zfp_in_valid, s1_out_valid, s2_out_valid, zfp_out_valid,
-                         zfp_in_ready, s1_out_ready, s2_out_ready, zfp_out_ready,
-                         lat_decode_acc, lat_uint2int_acc, lat_invlift_acc);
             end
         end
     end
@@ -407,15 +414,16 @@ state machine
             wlast <= '0;
             wstrb <= '0;
             addr_offset <= '0;
-            rw_cnt <= '0;
+            rd_cnt <= '0;
+            wr_cnt <= '0;
             seed <= '0;
             
             // ZFP Reset
-            zfp_start <= 0;
-            zfp_in_valid <= 0;
-            zfp_in_data <= 0;
+            zfp_in_valid_real <= 0;
+            zfp_in_data_real <= 0;
             zfp_out_ready <= 1; // Always ready to drain
             zfp_word_cnt <= 0;
+            zfp_out_word_cnt <= 0;
             zfp_araddr_reg <= 0;
             zfp_awaddr_reg <= 0;
             rdata_buf <= 0;
@@ -434,10 +442,12 @@ state machine
             wdata <= '0; 
             wstrb <= '0;
             addr_offset <= '0;
-            rw_cnt <= '0;
+            rd_cnt <= '0;
+            wr_cnt <= '0;
             seed <= '0;
-            zfp_start <= 0;
-            zfp_in_valid <= 0;
+            zfp_in_valid_real <= 0;
+            zfp_word_cnt <= 0;
+            zfp_out_word_cnt <= 0;
         end
         else begin
             unique case (test_case)
@@ -733,19 +743,73 @@ ZFP Copy Loop (Test Case 20)
                 64'd20: begin
                     if (state == STATE_IDLE) begin
                         if (start_proc == 1'b1) begin
-                            state <= STATE_ZFP_RD_REQ;
-                            rw_cnt <= 0;
+                            // rd_cnt: index of input cache lines read
+                            rd_cnt <= 0;
+                            // wr_cnt: index of output cache lines written
+                            wr_cnt <= 0;
+                            zfp_word_cnt <= 16; // Force read on first cycle
+                            zfp_out_word_cnt <= 0;
+                            state <= STATE_ZFP_PUSH_1;
+                            
                             arid <= 0;
                             awid <= 0;
-                            aruser <= 6'b000001; // Cacheable Shared (safe)
+                            aruser <= 6'b000001; // Cacheable Shared
                             awuser <= 6'b000001;
                         end
                     end
+                    else if (state == STATE_ZFP_PUSH_1) begin
+                        // 1. Push Input
+                        if (zfp_word_cnt < 16) begin
+                            zfp_in_valid_real <= 1;
+                            // Select 32-bit word from 512-bit cache line
+                            case (zfp_word_cnt)
+                                 0: zfp_in_data_real <= rdata_buf[ 31:  0];
+                                 1: zfp_in_data_real <= rdata_buf[ 63: 32];
+                                 2: zfp_in_data_real <= rdata_buf[ 95: 64];
+                                 3: zfp_in_data_real <= rdata_buf[127: 96];
+                                 4: zfp_in_data_real <= rdata_buf[159:128];
+                                 5: zfp_in_data_real <= rdata_buf[191:160];
+                                 6: zfp_in_data_real <= rdata_buf[223:192];
+                                 7: zfp_in_data_real <= rdata_buf[255:224];
+                                 8: zfp_in_data_real <= rdata_buf[287:256];
+                                 9: zfp_in_data_real <= rdata_buf[319:288];
+                                10: zfp_in_data_real <= rdata_buf[351:320];
+                                11: zfp_in_data_real <= rdata_buf[383:352];
+                                12: zfp_in_data_real <= rdata_buf[415:384];
+                                13: zfp_in_data_real <= rdata_buf[447:416];
+                                14: zfp_in_data_real <= rdata_buf[479:448];
+                                15: zfp_in_data_real <= rdata_buf[511:480];
+                            endcase
+                            
+                            if (zfp_in_ready) begin
+                                zfp_word_cnt <= zfp_word_cnt + 1;
+                            end
+                        end else begin
+                            zfp_in_valid_real <= 0;
+                        end
+                        
+                        // 2. Pop Output
+                        zfp_out_ready <= 1;
+                        if (zfp_out_valid) begin
+                             wdata_buf <= {zfp_out_data, wdata_buf[511:32]};
+                             zfp_out_word_cnt <= zfp_out_word_cnt + 1;
+                        end
+
+                        // 3. State Transitions (Output triggers take precedence to avoid holding finished data)
+                        if ((zfp_out_valid && zfp_out_word_cnt == 15) || (zfp_out_word_cnt == 16)) begin
+                             // We just received the 16th word (or already have 16), wdata_buf is full
+                             state <= STATE_ZFP_WR_REQ;
+                        end else if (zfp_word_cnt >= 16) begin
+                             // We need more input data
+                             state <= STATE_ZFP_RD_REQ;
+                        end
+                    end
+                    
                     else if (state == STATE_ZFP_RD_REQ) begin
+                        zfp_in_valid_real <= 0;
+                        zfp_out_ready <= 0; // Stall IP output while fetching input
                         arvalid <= 1;
-                        zfp_araddr_reg <= page_addr_0 + (rw_cnt << 6); // 64-byte aligned
-                        // Fix: Only clear valid if it was already high (handshake completes)
-                        // Reading 'arvalid' here reads the registered value from previous cycle
+                        zfp_araddr_reg <= page_addr_0 + (rd_cnt << 6); // 64-byte aligned
                         if (arvalid && arready) begin
                             arvalid <= 0;
                             state <= STATE_ZFP_RD_WAIT;
@@ -754,75 +818,17 @@ ZFP Copy Loop (Test Case 20)
                     else if (state == STATE_ZFP_RD_WAIT) begin
                         if (rvalid) begin
                             rdata_buf <= rdata;
-                            state <= STATE_ZFP_PUSH_1;
                             zfp_word_cnt <= 0;
-                            zfp_start <= 1; // Start Block 1
-                        end
-                    end
-                    // Push 1st Block (First 4 words)
-                    else if (state == STATE_ZFP_PUSH_1) begin
-                        zfp_start <= 0; 
-                        if (zfp_word_cnt < 4) begin
-                            zfp_in_valid <= 1;
-                            // Select word based on count
-                            case (zfp_word_cnt)
-                                0: zfp_in_data <= rdata_buf[63:0];
-                                1: zfp_in_data <= rdata_buf[127:64];
-                                2: zfp_in_data <= rdata_buf[191:128];
-                                3: zfp_in_data <= rdata_buf[255:192];
-                            endcase
-                            
-                            if (zfp_in_ready) begin
-                                zfp_word_cnt <= zfp_word_cnt + 1;
-                            end
-                        end else begin
-                            zfp_in_valid <= 0;
-                        end
-                       
-                        // Wait for done
-                        if (zfp_done) begin
-                             state <= STATE_ZFP_PUSH_2;
-                             zfp_word_cnt <= 0;
-                             zfp_start <= 1; // Start Block 2
-                        end
-                        
-                        // Collect Output
-                        if (zfp_out_valid) begin
-                             // Shift into wdata_buf - simple appender
-                             wdata_buf <= {zfp_out_data, wdata_buf[511:64]};
-                        end
-                    end
-                    
-                    // Push 2nd Block (Next 4 words)
-                    else if (state == STATE_ZFP_PUSH_2) begin
-                        zfp_start <= 0;
-                        if (zfp_word_cnt < 4) begin
-                            zfp_in_valid <= 1;
-                             case (zfp_word_cnt)
-                                0: zfp_in_data <= rdata_buf[319:256];
-                                1: zfp_in_data <= rdata_buf[383:320];
-                                2: zfp_in_data <= rdata_buf[447:384];
-                                3: zfp_in_data <= rdata_buf[511:448];
-                            endcase
-                            if (zfp_in_ready) begin
-                                zfp_word_cnt <= zfp_word_cnt + 1;
-                            end
-                        end else begin
-                            zfp_in_valid <= 0;
-                        end
-                        
-                        if (zfp_done) begin
-                             state <= STATE_ZFP_WR_REQ;
-                        end
-                        
-                         if (zfp_out_valid) begin
-                             wdata_buf <= {zfp_out_data, wdata_buf[511:64]};
+                            rd_cnt <= rd_cnt + 1;
+                            state <= STATE_ZFP_PUSH_1;
                         end
                     end
                     
                     else if (state == STATE_ZFP_WR_REQ) begin
+                        zfp_in_valid_real <= 0;
+                        zfp_out_ready <= 0; // Stall IP output while writing memory
                         awvalid <= 1;
-                        zfp_awaddr_reg <= seed_init + (rw_cnt << 6); // Output Base
+                        zfp_awaddr_reg <= seed_init + (wr_cnt << 6); // Output Base
                         if (awvalid && awready) begin
                             awvalid <= 0;
                             state <= STATE_ZFP_WR_DATA;
@@ -841,12 +847,20 @@ ZFP Copy Loop (Test Case 20)
                     end
                     else if (state == STATE_ZFP_WR_RESP) begin
                         if (bvalid) begin
-                            rw_cnt <= rw_cnt + 1;
-                            if (rw_cnt == num_request) begin
+                            wr_cnt <= wr_cnt + 1;
+                            zfp_out_word_cnt <= 0;
+                            if (wr_cnt + 1 == num_request) begin
                                 state <= STATE_W_DONE;
                             end else begin
-                                state <= STATE_ZFP_RD_REQ; // Loop
+                                state <= STATE_ZFP_PUSH_1; // Resume processing
                             end
+                        end
+                    end
+                    else if (state == STATE_W_DONE) begin
+                        // Let the IP drain any remaining items 
+                        zfp_out_ready <= 1'b1;
+                        if (start_proc == 1'b0) begin
+                            state <= STATE_IDLE;
                         end
                     end
                     
