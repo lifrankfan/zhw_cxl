@@ -216,58 +216,91 @@ module psedu_read_write (
     // synthesis translate_on
 
     // ============================================================
-    // Latency Counter (multi-stage)
+    // Latency Counter (multi-stage, per-block delta accumulation)
+    // Uses streaming handshakes as stage boundaries since the HLS
+    // done signals fire simultaneously for decode and u2i.
     // ============================================================
     logic [63:0] cycle_cnt;
-    logic [63:0] block_start_cycle;
-    logic [63:0] decode_done_cycle;
-    logic [63:0] u2i_done_cycle;
-
-    // Accumulated total latency
     logic [63:0] lat_decode_acc;
     logic [63:0] lat_uint2int_acc; 
     logic [63:0] lat_invlift_acc;  
 
+    // Per-block stage boundary timestamps
+    logic [63:0] block_start_cycle;    // when input data first enters decode
+    logic [63:0] decode_out_cycle;     // first decode→u2i handshake per block
+    logic [63:0] u2i_out_cycle;        // first u2i→inv handshake per block
+    logic [31:0] block_count;
+
+    // Edge detectors: capture only the FIRST handshake per block
+    logic decode_out_captured;         // set after first decode→u2i handshake
+    logic u2i_out_captured;            // set after first u2i→inv handshake
+    logic block_input_captured;        // set after first input handshake
+
     always_ff @(posedge axi4_mm_clk or negedge axi4_mm_rst_n) begin
         if (!axi4_mm_rst_n) begin
-            cycle_cnt       <= '0;
-            block_start_cycle <= '0;
-            decode_done_cycle <= '0;
-            u2i_done_cycle <= '0;
-            lat_decode_acc  <= '0;
-            lat_uint2int_acc <= '0;
-            lat_invlift_acc <= '0;
+            cycle_cnt           <= '0;
+            block_start_cycle   <= '0;
+            decode_out_cycle    <= '0;
+            u2i_out_cycle       <= '0;
+            lat_decode_acc      <= '0;
+            lat_uint2int_acc    <= '0;
+            lat_invlift_acc     <= '0;
+            block_count         <= '0;
+            decode_out_captured <= '0;
+            u2i_out_captured    <= '0;
+            block_input_captured <= '0;
         end else begin
             cycle_cnt <= cycle_cnt + 64'd1;
 
-            if (zfp_start_gated) begin
+            // Capture block start: first input word accepted by decode
+            if (zfp_in_valid_real && zfp_in_ready && !block_input_captured) begin
                 block_start_cycle <= cycle_cnt;
-                $display("DBG_LAT [%0t] zfp_start_gated: cycle_cnt=%0d", $time, cycle_cnt);
+                block_input_captured <= 1'b1;
+                $display("DBG_LAT [%0t] block_input_start: cycle=%0d", $time, cycle_cnt);
             end
 
-            if (decode_done) begin
-                decode_done_cycle <= cycle_cnt;
+            // Stage boundary 1: first word out of decode → into u2i
+            if (decode_to_u2i_valid && decode_to_u2i_ready && !decode_out_captured) begin
+                decode_out_cycle <= cycle_cnt;
+                decode_out_captured <= 1'b1;
                 lat_decode_acc <= lat_decode_acc + (cycle_cnt - block_start_cycle);
-                $display("DBG_LAT [%0t] decode_done: delta=%0d", $time, cycle_cnt - block_start_cycle);
+                $display("DBG_LAT [%0t] decode_out: delta=%0d acc=%0d",
+                         $time, cycle_cnt - block_start_cycle, lat_decode_acc + (cycle_cnt - block_start_cycle));
             end
 
-            if (u2i_done) begin
-                u2i_done_cycle <= cycle_cnt;
-                // Safely handle u2i finishing before decode_done registers in the edgecase
-                lat_uint2int_acc <= lat_uint2int_acc + (cycle_cnt - decode_done_cycle);
-                $display("DBG_LAT [%0t] u2i_done: delta=%0d", $time, cycle_cnt - decode_done_cycle);
+            // Stage boundary 2: first word out of u2i → into inv_lift
+            if (u2i_to_inv_valid && u2i_to_inv_ready && !u2i_out_captured) begin
+                u2i_out_cycle <= cycle_cnt;
+                u2i_out_captured <= 1'b1;
+                lat_uint2int_acc <= lat_uint2int_acc + (cycle_cnt - decode_out_cycle);
+                $display("DBG_LAT [%0t] u2i_out: delta=%0d acc=%0d",
+                         $time, cycle_cnt - decode_out_cycle, lat_uint2int_acc + (cycle_cnt - decode_out_cycle));
             end
 
+            // Stage 3 completion: inv_done fires once per block
             if (inv_done) begin
-                lat_invlift_acc <= lat_invlift_acc + (cycle_cnt - u2i_done_cycle);
-                $display("DBG_LAT [%0t] inv_done: delta=%0d | total_block=%0d", $time, cycle_cnt - u2i_done_cycle, cycle_cnt - block_start_cycle);
+                lat_invlift_acc <= lat_invlift_acc + (cycle_cnt - u2i_out_cycle);
+                block_count <= block_count + 32'd1;
+                // Reset per-block capture flags for next block
+                decode_out_captured  <= 1'b0;
+                u2i_out_captured     <= 1'b0;
+                block_input_captured <= 1'b0;
+                $display("DBG_LAT [%0t] inv_done: delta=%0d acc=%0d | block=%0d",
+                         $time, cycle_cnt - u2i_out_cycle, lat_invlift_acc + (cycle_cnt - u2i_out_cycle), block_count + 1);
             end
 
             if (start_proc && test_case == 64'd20) begin
-                lat_decode_acc   <= '0;
-                lat_uint2int_acc <= '0;
-                lat_invlift_acc  <= '0;
-                cycle_cnt        <= '0;
+                lat_decode_acc       <= '0;
+                lat_uint2int_acc     <= '0;
+                lat_invlift_acc      <= '0;
+                block_start_cycle    <= '0;
+                decode_out_cycle     <= '0;
+                u2i_out_cycle        <= '0;
+                cycle_cnt            <= '0;
+                block_count          <= '0;
+                decode_out_captured  <= '0;
+                u2i_out_captured     <= '0;
+                block_input_captured <= '0;
                 $display("DBG_LAT [%0t] RESET accumulators (start_proc)", $time);
             end
         end
