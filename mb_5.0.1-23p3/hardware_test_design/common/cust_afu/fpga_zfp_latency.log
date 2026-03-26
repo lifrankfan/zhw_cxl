@@ -1,0 +1,26 @@
+#   ZFP FPGA Decompression Latency Report (SIFT)
+# ============================================
+#   Vectors:       100
+#   Dimension:     128
+#   Blocks:        3202
+#   Bits/value:    8
+# ============================================
+# 
+# Total accumulated cycles:
+#   Overall (AXI):      132173 cycles
+#   Decode Stage:       1034556 cycles
+#   Uint-to-Int Stage:  125414 cycles
+#   Inv Lift Stage:     125638 cycles
+# 
+# Pipeline Performance (cycles):
+#   Overall Throughput: ( 132173 total AXI cycles / 3202 blocks ) = 41 cycles/block
+# --------------------------------------------
+# Algorithm Processing Time per Block:
+#   Decode Stage:       41 cycles (32 bitplanes processing + 9 loop overhead)
+#   Negabinary->signed: 1 cycle (Combinatorial integer math)
+#   Int->float cast:    6 cycles (4-stage butterfly + 2-stage exponent)
+# --------------------------------------------
+# Physical Pipeline Depth (Hardware Registers):
+#   Decode HW Depth:    ( 1034556 accumulated cycles / 3202 blocks ) = 323 hardware stages
+#   U2I HW Depth:       ( 125414 accumulated cycles / 3202 blocks ) = 39 hardware stages
+#   Cast HW Depth:      ( 125638 accumulated cycles / 3202 blocks ) = 39 hardware stages
