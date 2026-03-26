@@ -9,10 +9,14 @@ vlib work
 
 echo "--- Compiling TB/Wrapper ---"
 vlib zfp_decode_lib
-vlog -sv -work zfp_decode_lib /fast-lab-share/lifan3/zfp/zhw/src/zfp_decode_f32.prj/components/zfp_decode_f32/zfp_decode_f32/synth/*.v \
-    /fast-lab-share/lifan3/zfp/zhw/src/zfp_decode_f32.prj/components/zfp_decode_f32/zfp_decode_f32/*_internal_10/synth/acl_ecc_pkg.sv \
-    /fast-lab-share/lifan3/zfp/zhw/src/zfp_decode_f32.prj/components/zfp_decode_f32/zfp_decode_f32/*_internal_10/synth/*.v \
-    /fast-lab-share/lifan3/zfp/zhw/src/zfp_decode_f32.prj/components/zfp_decode_f32/zfp_decode_f32/*_internal_10/synth/*.sv
+vlog -sv -work zfp_decode_lib /fast-lab-share/lifan3/zfp/mb_5.0.1-23p3/hardware_test_design/common/cust_afu/zfp_decode_f32_new/zfp_decode_header_f32/zfp_decode_header_f32/synth/*.v \
+    /fast-lab-share/lifan3/zfp/mb_5.0.1-23p3/hardware_test_design/common/cust_afu/zfp_decode_f32_new/zfp_decode_header_f32/zfp_decode_header_f32/*_internal_10/synth/acl_ecc_pkg.sv \
+    /fast-lab-share/lifan3/zfp/mb_5.0.1-23p3/hardware_test_design/common/cust_afu/zfp_decode_f32_new/zfp_decode_header_f32/zfp_decode_header_f32/*_internal_10/synth/*.v \
+    /fast-lab-share/lifan3/zfp/mb_5.0.1-23p3/hardware_test_design/common/cust_afu/zfp_decode_f32_new/zfp_decode_header_f32/zfp_decode_header_f32/*_internal_10/synth/*.sv \
+    /fast-lab-share/lifan3/zfp/mb_5.0.1-23p3/hardware_test_design/common/cust_afu/zfp_decode_f32_new/zfp_decode_bitplanes_f32/zfp_decode_bitplanes_f32/synth/*.v \
+    /fast-lab-share/lifan3/zfp/mb_5.0.1-23p3/hardware_test_design/common/cust_afu/zfp_decode_f32_new/zfp_decode_bitplanes_f32/zfp_decode_bitplanes_f32/*_internal_10/synth/acl_ecc_pkg.sv \
+    /fast-lab-share/lifan3/zfp/mb_5.0.1-23p3/hardware_test_design/common/cust_afu/zfp_decode_f32_new/zfp_decode_bitplanes_f32/zfp_decode_bitplanes_f32/*_internal_10/synth/*.v \
+    /fast-lab-share/lifan3/zfp/mb_5.0.1-23p3/hardware_test_design/common/cust_afu/zfp_decode_f32_new/zfp_decode_bitplanes_f32/zfp_decode_bitplanes_f32/*_internal_10/synth/*.sv
 
 vlib zfp_u2i_lib
 vlog -sv -work zfp_u2i_lib /fast-lab-share/lifan3/zfp/zhw/src/zfp_decode_f32.prj/components/zfp_uint_to_int_f32/zfp_uint_to_int_f32/synth/*.v \
@@ -33,7 +37,9 @@ echo "--- Running Sim ---"
 vsim -c -L zfp_decode_lib -L zfp_u2i_lib -L zfp_inv_lift_lib -L altera_mf_ver -L lpm_ver -L sgate_ver -L altera_lnsim_ver -L twentynm_ver -L tennm_ver -suppress 3722,2685 -do "run -all; quit" cust_afu_tb 2>&1 | tee debug_sim.log
 
 echo "--- Checking DBG ---"
-grep "DBG_LAT" debug_sim.log
-echo "--- Checking Latency ---"
-grep -E "Latency|Overall|Stage|PASS|FAIL" debug_sim.log
+grep "DBG_LAT" debug_sim.log | tail -20
+echo "--- Extracting Latency Report ---"
+grep -A 25 "ZFP FPGA Decompression Latency Report" debug_sim.log | tee fpga_zfp_latency.log
+echo ""
+echo "--- Results saved to fpga_zfp_latency.log ---"
 echo "--- Done ---"

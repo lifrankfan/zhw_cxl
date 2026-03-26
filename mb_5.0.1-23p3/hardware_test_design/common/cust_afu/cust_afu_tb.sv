@@ -37,6 +37,11 @@ module cust_afu_tb;
     // Test Signals
     logic [63:0] lat;
     logic [63:0] lat_s1, lat_s2, lat_s3;
+    logic [31:0] blk_cnt;
+
+    // Configuration: number of SIFT vectors to process
+    localparam NUM_VECTORS    = 100;
+    localparam NUM_CACHELINES = NUM_VECTORS * 8;  // 8 cachelines per 128-float vector
 
     // Clock Gen
     initial begin
@@ -77,10 +82,10 @@ module cust_afu_tb;
 
     // Mock Host Memory (Slave)
     // Load golden data from file
-    logic [7:0] mem_data [0:65535]; // 64KB buffer
+    logic [7:0] mem_data [0:131071]; // 128KB buffer for multi-vector data
     initial begin
         integer fd, code;
-        fd = $fopen("/fast-lab-share/lifan3/zfp/zhw/src/sift_compressed.zfp", "rb");
+        fd = $fopen("/fast-lab-share/lifan3/zfp/mb_5.0.1-23p3/hardware_test_design/common/cust_afu/test_data_sift/sift_compressed_multi.zfp", "rb");
         if (fd == 0) begin
             $display("ERROR: Could not open golden data file!");
             $finish;
@@ -208,8 +213,8 @@ module cust_afu_tb;
         csr_wr(22'h0018, 64'd20); // CSR_TEST_CASE
         
         // 2. Configure Num Requests
-        // Running 8 cachelines (128 floats = 1 SIFT vector) to avoid ModelSim Starter Edition timeout
-        csr_wr(22'h0058, 64'd8);  // CSR_NUM_REQUEST = 8 cache lines
+        // Running NUM_CACHELINES cachelines (NUM_VECTORS vectors × 8 cachelines each)
+        csr_wr(22'h0058, NUM_CACHELINES);
         // 3. Configure Dst Addr
         csr_wr(22'h0050, 64'hB0000000); // CSR_DST (mapped to seed_init)
         
@@ -221,15 +226,14 @@ module cust_afu_tb;
         // Wait for Completion by polling the state machine directly
         begin
             int timeout;
-            for (timeout = 0; timeout < 500000; timeout++) begin
-                if (dut.psedu_read_write_inst.wr_cnt == 64'd8) begin // All 8 cachelines (128 floats) written
+            for (timeout = 0; timeout < 50000000; timeout++) begin
+                if (dut.psedu_read_write_inst.wr_cnt == NUM_CACHELINES) begin
                     $display("TB INFO: Process completed at timeout counter: %0d", timeout);
                     break;
                 end
-                // Wait sometime before polling again
-                #(100); // 10 clock cycles delay (100ns)
+                #(100); // 10 clock cycles delay
             end
-            if (timeout == 50000) begin
+            if (timeout == 50000000) begin
                 $display("TB ERROR: Process timed out unconditionally!");
             end
         end
@@ -242,25 +246,51 @@ module cust_afu_tb;
         csr_rd(22'h0070, lat_s2); // Uint-to-Int
         csr_rd(22'h0078, lat_s3); // Inv Lift
 
+        // Read block count from RTL
+        blk_cnt = dut.psedu_read_write_inst.block_count;
+
         $display("");
         $display("============================================");
-        $display("  ZFP FP32 Decompression Latency Report (SIFT)");
+        $display("  ZFP FPGA Decompression Latency Report (SIFT)");
         $display("============================================");
+        $display("  Vectors:       %0d", NUM_VECTORS);
+        $display("  Dimension:     128");
+        $display("  Blocks:        %0d", blk_cnt);
+        $display("  Bits/value:    8");
+        $display("============================================");
+        $display("");
+        $display("Total accumulated cycles:");
         $display("  Overall (AXI):      %0d cycles", lat);
         $display("  Decode Stage:       %0d cycles", lat_s1);
         $display("  Uint-to-Int Stage:  %0d cycles", lat_s2);
         $display("  Inv Lift Stage:     %0d cycles", lat_s3);
+        $display("");
+        if (blk_cnt > 0) begin
+            $display("Pipeline Performance (cycles):");
+            $display("  Overall Throughput: ( %0d total AXI cycles / %0d blocks ) = %0d cycles/block", lat, blk_cnt, lat / blk_cnt);
+            $display("--------------------------------------------");
+            $display("Algorithm Processing Time per Block:");
+            $display("  Decode Stage:       41 cycles (32 bitplanes processing + 9 loop overhead)");
+            $display("  Negabinary->signed: 1 cycle (Combinatorial integer math)");
+            $display("  Int->float cast:    6 cycles (4-stage butterfly + 2-stage exponent)");
+            $display("--------------------------------------------");
+            $display("Physical Pipeline Depth (Hardware Registers):");
+            $display("  Decode HW Depth:    ( %0d accumulated cycles / %0d blocks ) = %0d hardware stages", lat_s1, blk_cnt, lat_s1 / blk_cnt);
+            $display("  U2I HW Depth:       ( %0d accumulated cycles / %0d blocks ) = %0d hardware stages", lat_s2, blk_cnt, lat_s2 / blk_cnt);
+            $display("  Cast HW Depth:      ( %0d accumulated cycles / %0d blocks ) = %0d hardware stages", lat_s3, blk_cnt, lat_s3 / blk_cnt);
+        end
         $display("============================================");
         
-        if (lat > 0) 
-            $display("PASS: Latency Recorded");
+        if (lat > 0 && blk_cnt > 0) 
+            $display("PASS: Latency Recorded (%0d blocks processed)", blk_cnt);
         else 
-            $display("FAIL: Latency is 0");
+            $display("FAIL: Latency is 0 or no blocks processed");
             
         $finish;
     end
 
     // Cycle-accurate profiling for the final IP stage output
+    /*
     always_ff @(posedge dut.psedu_read_write_inst.axi4_mm_clk) begin
         if (dut.psedu_read_write_inst.zfp_start_gated) begin
             $display("TB DBG [%0t] zfp_start_gated PULSED!", $time);
@@ -272,4 +302,5 @@ module cust_afu_tb;
             $display("TB DBG [%0t] inv_done PULSED!", $time);
         end
     end
+    */
 endmodule

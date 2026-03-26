@@ -145,22 +145,38 @@ module psedu_read_write (
     logic [159:0] u2i_to_inv_data;
     logic u2i_to_inv_valid, u2i_to_inv_ready;
 
-    logic decode_busy, decode_done;
-    logic u2i_busy, u2i_done;
-    logic inv_busy, inv_done;
+    logic [191:0] header_to_bits_data;
+    logic header_to_bits_valid, header_to_bits_ready;
+    logic header_busy, header_done;
+    logic bitplanes_busy, bitplanes_done;
 
-    zfp_decode_f32 zfp_decode_inst (
+    zfp_decode_header_f32 zfp_header_inst (
         .clock(axi4_mm_clk),
         .resetn(axi4_mm_rst_n),
         .in_stream_data(zfp_in_data_real),
         .in_stream_valid(zfp_in_valid_real),
         .in_stream_ready(zfp_in_ready),
+        .out_stream_data(header_to_bits_data),
+        .out_stream_valid(header_to_bits_valid),
+        .out_stream_ready(header_to_bits_ready),
+        .start(zfp_start_gated),
+        .busy(header_busy),
+        .done(header_done),
+        .stall(1'b0)
+    );
+
+    zfp_decode_bitplanes_f32 zfp_bitplanes_inst (
+        .clock(axi4_mm_clk),
+        .resetn(axi4_mm_rst_n),
+        .in_stream_data(header_to_bits_data),
+        .in_stream_valid(header_to_bits_valid),
+        .in_stream_ready(header_to_bits_ready),
         .out_stream_data(decode_to_u2i_data),
         .out_stream_valid(decode_to_u2i_valid),
         .out_stream_ready(decode_to_u2i_ready),
         .start(zfp_start_gated),
-        .busy(decode_busy),
-        .done(decode_done),
+        .busy(bitplanes_busy),
+        .done(bitplanes_done),
         .stall(1'b0)
     );
 
@@ -194,11 +210,12 @@ module psedu_read_write (
         .stall(1'b0)
     );
 
-    assign zfp_busy = decode_busy | u2i_busy | inv_busy;
+    assign zfp_busy = header_busy | bitplanes_busy | u2i_busy | inv_busy;
     assign zfp_done = inv_done; 
 
     // DEBUG: Monitor Stream Handshakes internally
     // synthesis translate_off
+    /*
     always_ff @(posedge axi4_mm_clk) begin
         if (zfp_start_gated) begin
             $display("RTL DBG [%0t] zfp_start asserted", $time);
@@ -213,6 +230,7 @@ module psedu_read_write (
             $display("RTL DBG [%0t] zfp_out_valid=1, ready=%b", $time, zfp_out_ready);
         end
     end
+    */
     // synthesis translate_on
 
     // ============================================================
