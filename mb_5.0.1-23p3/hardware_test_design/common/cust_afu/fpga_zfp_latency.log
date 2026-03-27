@@ -2,25 +2,25 @@
 # ============================================
 #   Vectors:       100
 #   Dimension:     128
-#   Blocks:        3202
+#   Blocks:        3200
 #   Bits/value:    8
 # ============================================
 # 
 # Total accumulated cycles:
-#   Overall (AXI):      132173 cycles
-#   Decode Stage:       1034556 cycles
-#   Uint-to-Int Stage:  125414 cycles
-#   Inv Lift Stage:     125638 cycles
+#   Overall (AXI):      131917 cycles
+#   Decode Stage:       1434204 cycles
+#   Uint-to-Int Stage:  125135 cycles
+#   Inv Lift Stage:     125410 cycles
 # 
 # Pipeline Performance (cycles):
-#   Overall Throughput: ( 132173 total AXI cycles / 3202 blocks ) = 41 cycles/block
+#   Overall Throughput: ( 131917 total AXI cycles / 3200 blocks ) = 41 cycles/block
 # --------------------------------------------
 # Algorithm Processing Time per Block:
 #   Decode Stage:       41 cycles (32 bitplanes processing + 9 loop overhead)
 #   Negabinary->signed: 1 cycle (Combinatorial integer math)
 #   Int->float cast:    6 cycles (4-stage butterfly + 2-stage exponent)
+# Physical Pipeline Depth (Hardware Latency):
+#   Decode Stage:       448 hardware stages (avg transit time)
+#   U2I Stage:          39 hardware stages
+#   Cast Stage:         39 hardware stages
 # --------------------------------------------
-# Physical Pipeline Depth (Hardware Registers):
-#   Decode HW Depth:    ( 1034556 accumulated cycles / 3202 blocks ) = 323 hardware stages
-#   U2I HW Depth:       ( 125414 accumulated cycles / 3202 blocks ) = 39 hardware stages
-#   Cast HW Depth:      ( 125638 accumulated cycles / 3202 blocks ) = 39 hardware stages

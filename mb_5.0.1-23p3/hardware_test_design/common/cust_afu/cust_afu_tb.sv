@@ -198,6 +198,9 @@ module cust_afu_tb;
 
     // Main Test Sequence
     initial begin
+        logic [63:0] lat_s1, lat_s2, lat_s3;
+        logic [63:0] thru_s1, thru_s2, thru_s3;
+        logic [31:0] blk_cnt;
         rst_n = 0;
         // Reset
         rst_n = 1'b0;
@@ -247,7 +250,11 @@ module cust_afu_tb;
         csr_rd(22'h0078, lat_s3); // Inv Lift
 
         // Read block count from RTL
+        // Read block count and throughput from RTL internal registers
         blk_cnt = dut.psedu_read_write_inst.block_count;
+        thru_s1 = dut.psedu_read_write_inst.lat_thru_decode_acc;
+        thru_s2 = dut.psedu_read_write_inst.lat_thru_uint2int_acc;
+        thru_s3 = dut.psedu_read_write_inst.lat_thru_invlift_acc;
 
         $display("");
         $display("============================================");
@@ -273,11 +280,15 @@ module cust_afu_tb;
             $display("  Decode Stage:       41 cycles (32 bitplanes processing + 9 loop overhead)");
             $display("  Negabinary->signed: 1 cycle (Combinatorial integer math)");
             $display("  Int->float cast:    6 cycles (4-stage butterfly + 2-stage exponent)");
+            $display("Physical Pipeline Depth (Hardware Latency):");
+            $display("  Decode Stage:       %0d hardware stages (avg transit time)", lat_s1 / blk_cnt);
+            $display("  U2I Stage:          %0d hardware stages", lat_s2 / blk_cnt);
+            $display("  Cast Stage:         %0d hardware stages", lat_s3 / blk_cnt);
             $display("--------------------------------------------");
-            $display("Physical Pipeline Depth (Hardware Registers):");
-            $display("  Decode HW Depth:    ( %0d accumulated cycles / %0d blocks ) = %0d hardware stages", lat_s1, blk_cnt, lat_s1 / blk_cnt);
-            $display("  U2I HW Depth:       ( %0d accumulated cycles / %0d blocks ) = %0d hardware stages", lat_s2, blk_cnt, lat_s2 / blk_cnt);
-            $display("  Cast HW Depth:      ( %0d accumulated cycles / %0d blocks ) = %0d hardware stages", lat_s3, blk_cnt, lat_s3 / blk_cnt);
+            $display("Dynamic Throughput (Cycles Per Block):");
+            $display("  Decode Stage:       %0d cycles/block", thru_s1 / (blk_cnt-1));
+            $display("  U2I Stage:          %0d cycles/block", thru_s2 / (blk_cnt-1));
+            $display("  Cast Stage:         %0d cycles/block", thru_s3 / (blk_cnt-1));
         end
         $display("============================================");
         

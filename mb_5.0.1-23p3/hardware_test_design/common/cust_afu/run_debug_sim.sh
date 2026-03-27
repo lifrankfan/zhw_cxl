@@ -9,14 +9,22 @@ vlib work
 
 echo "--- Compiling TB/Wrapper ---"
 vlib zfp_decode_lib
-vlog -sv -work zfp_decode_lib /fast-lab-share/lifan3/zfp/mb_5.0.1-23p3/hardware_test_design/common/cust_afu/zfp_decode_f32_new/zfp_decode_header_f32/zfp_decode_header_f32/synth/*.v \
-    /fast-lab-share/lifan3/zfp/mb_5.0.1-23p3/hardware_test_design/common/cust_afu/zfp_decode_f32_new/zfp_decode_header_f32/zfp_decode_header_f32/*_internal_10/synth/acl_ecc_pkg.sv \
-    /fast-lab-share/lifan3/zfp/mb_5.0.1-23p3/hardware_test_design/common/cust_afu/zfp_decode_f32_new/zfp_decode_header_f32/zfp_decode_header_f32/*_internal_10/synth/*.v \
-    /fast-lab-share/lifan3/zfp/mb_5.0.1-23p3/hardware_test_design/common/cust_afu/zfp_decode_f32_new/zfp_decode_header_f32/zfp_decode_header_f32/*_internal_10/synth/*.sv \
-    /fast-lab-share/lifan3/zfp/mb_5.0.1-23p3/hardware_test_design/common/cust_afu/zfp_decode_f32_new/zfp_decode_bitplanes_f32/zfp_decode_bitplanes_f32/synth/*.v \
-    /fast-lab-share/lifan3/zfp/mb_5.0.1-23p3/hardware_test_design/common/cust_afu/zfp_decode_f32_new/zfp_decode_bitplanes_f32/zfp_decode_bitplanes_f32/*_internal_10/synth/acl_ecc_pkg.sv \
-    /fast-lab-share/lifan3/zfp/mb_5.0.1-23p3/hardware_test_design/common/cust_afu/zfp_decode_f32_new/zfp_decode_bitplanes_f32/zfp_decode_bitplanes_f32/*_internal_10/synth/*.v \
-    /fast-lab-share/lifan3/zfp/mb_5.0.1-23p3/hardware_test_design/common/cust_afu/zfp_decode_f32_new/zfp_decode_bitplanes_f32/zfp_decode_bitplanes_f32/*_internal_10/synth/*.sv
+vlog -sv -work zfp_decode_lib /fast-lab-share/lifan3/zfp/zhw/src/zfp_decode_f32_tlp.prj/components/zfp_decode_f32/zfp_decode_f32/synth/*.v \
+    /fast-lab-share/lifan3/zfp/zhw/src/zfp_decode_f32_tlp.prj/components/zfp_decode_f32/zfp_decode_f32/*_internal_10/synth/acl_ecc_pkg.sv \
+    /fast-lab-share/lifan3/zfp/zhw/src/zfp_decode_f32_tlp.prj/components/zfp_decode_f32/zfp_decode_f32/*_internal_10/synth/*.v \
+    /fast-lab-share/lifan3/zfp/zhw/src/zfp_decode_f32_tlp.prj/components/zfp_decode_f32/zfp_decode_f32/*_internal_10/synth/*.sv
+
+vlib zfp_u2i_lib
+vlog -sv -work zfp_u2i_lib /fast-lab-share/lifan3/zfp/zhw/src/zfp_decode_f32_tlp.prj/components/zfp_uint_to_int_f32/zfp_uint_to_int_f32/synth/*.v \
+    /fast-lab-share/lifan3/zfp/zhw/src/zfp_decode_f32_tlp.prj/components/zfp_uint_to_int_f32/zfp_uint_to_int_f32/*_internal_10/synth/acl_ecc_pkg.sv \
+    /fast-lab-share/lifan3/zfp/zhw/src/zfp_decode_f32_tlp.prj/components/zfp_uint_to_int_f32/zfp_uint_to_int_f32/*_internal_10/synth/*.v \
+    /fast-lab-share/lifan3/zfp/zhw/src/zfp_decode_f32_tlp.prj/components/zfp_uint_to_int_f32/zfp_uint_to_int_f32/*_internal_10/synth/*.sv
+
+vlib zfp_inv_lift_lib
+vlog -sv -work zfp_inv_lift_lib /fast-lab-share/lifan3/zfp/zhw/src/zfp_decode_f32_tlp.prj/components/zfp_inv_lift_f32/zfp_inv_lift_f32/synth/*.v \
+    /fast-lab-share/lifan3/zfp/zhw/src/zfp_decode_f32_tlp.prj/components/zfp_inv_lift_f32/zfp_inv_lift_f32/*_internal_10/synth/acl_ecc_pkg.sv \
+    /fast-lab-share/lifan3/zfp/zhw/src/zfp_decode_f32_tlp.prj/components/zfp_inv_lift_f32/zfp_inv_lift_f32/*_internal_10/synth/*.v \
+    /fast-lab-share/lifan3/zfp/zhw/src/zfp_decode_f32_tlp.prj/components/zfp_inv_lift_f32/zfp_inv_lift_f32/*_internal_10/synth/*.sv
 
 vlib zfp_u2i_lib
 vlog -sv -work zfp_u2i_lib /fast-lab-share/lifan3/zfp/zhw/src/zfp_decode_f32.prj/components/zfp_uint_to_int_f32/zfp_uint_to_int_f32/synth/*.v \

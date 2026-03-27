@@ -71,7 +71,10 @@ module psedu_read_write (
     // Per-stage latency outputs
     output logic [63:0] lat_decode,
     output logic [63:0] lat_uint2int,
-    output logic [63:0] lat_invlift
+    output logic [63:0] lat_invlift,
+    output logic [63:0] lat_thru_decode,
+    output logic [63:0] lat_thru_uint2int,
+    output logic [63:0] lat_thru_invlift
 );
 
     enum logic [4:0] {
@@ -150,27 +153,12 @@ module psedu_read_write (
     logic header_busy, header_done;
     logic bitplanes_busy, bitplanes_done;
 
-    zfp_decode_header_f32 zfp_header_inst (
+    zfp_decode_f32 zfp_decode_inst (
         .clock(axi4_mm_clk),
         .resetn(axi4_mm_rst_n),
         .in_stream_data(zfp_in_data_real),
         .in_stream_valid(zfp_in_valid_real),
         .in_stream_ready(zfp_in_ready),
-        .out_stream_data(header_to_bits_data),
-        .out_stream_valid(header_to_bits_valid),
-        .out_stream_ready(header_to_bits_ready),
-        .start(zfp_start_gated),
-        .busy(header_busy),
-        .done(header_done),
-        .stall(1'b0)
-    );
-
-    zfp_decode_bitplanes_f32 zfp_bitplanes_inst (
-        .clock(axi4_mm_clk),
-        .resetn(axi4_mm_rst_n),
-        .in_stream_data(header_to_bits_data),
-        .in_stream_valid(header_to_bits_valid),
-        .in_stream_ready(header_to_bits_ready),
         .out_stream_data(decode_to_u2i_data),
         .out_stream_valid(decode_to_u2i_valid),
         .out_stream_ready(decode_to_u2i_ready),
@@ -210,7 +198,7 @@ module psedu_read_write (
         .stall(1'b0)
     );
 
-    assign zfp_busy = header_busy | bitplanes_busy | u2i_busy | inv_busy;
+    assign zfp_busy = bitplanes_busy | u2i_busy | inv_busy;
     assign zfp_done = inv_done; 
 
     // DEBUG: Monitor Stream Handshakes internally
@@ -243,11 +231,17 @@ module psedu_read_write (
     logic [63:0] lat_uint2int_acc; 
     logic [63:0] lat_invlift_acc;  
 
-    // Per-block stage boundary timestamps
+    // Throughput Tracking (Inter-Departure Interval)
+    logic [63:0] block_count;
     logic [63:0] block_start_cycle;    // when input data first enters decode
     logic [63:0] decode_out_cycle;     // first decode→u2i handshake per block
     logic [63:0] u2i_out_cycle;        // first u2i→inv handshake per block
-    logic [31:0] block_count;
+    logic [63:0] last_exit_decode;
+    logic [63:0] last_exit_u2i;
+    logic [63:0] last_exit_inv;
+    logic [63:0] lat_thru_decode_acc;
+    logic [63:0] lat_thru_uint2int_acc;
+    logic [63:0] lat_thru_invlift_acc;
 
     // Edge detectors: capture only the FIRST handshake per block
     logic decode_out_captured;         // set after first decode→u2i handshake
@@ -263,6 +257,12 @@ module psedu_read_write (
             lat_decode_acc      <= '0;
             lat_uint2int_acc    <= '0;
             lat_invlift_acc     <= '0;
+            lat_thru_decode_acc   <= '0;
+            lat_thru_uint2int_acc <= '0;
+            lat_thru_invlift_acc  <= '0;
+            last_exit_decode     <= '0;
+            last_exit_u2i        <= '0;
+            last_exit_inv        <= '0;
             block_count         <= '0;
             decode_out_captured <= '0;
             u2i_out_captured    <= '0;
@@ -282,7 +282,14 @@ module psedu_read_write (
                 decode_out_cycle <= cycle_cnt;
                 decode_out_captured <= 1'b1;
                 lat_decode_acc <= lat_decode_acc + (cycle_cnt - block_start_cycle);
-                $display("DBG_LAT [%0t] decode_out: delta=%0d acc=%0d",
+                
+                // Throughput (Inter-departure)
+                if (block_count > 0) begin
+                    lat_thru_decode_acc <= lat_thru_decode_acc + (cycle_cnt - last_exit_decode);
+                end
+                last_exit_decode <= cycle_cnt;
+
+                $display("RTL DBG [%0t] decode_out: delta=%0d acc=%0d",
                          $time, cycle_cnt - block_start_cycle, lat_decode_acc + (cycle_cnt - block_start_cycle));
             end
 
@@ -291,7 +298,14 @@ module psedu_read_write (
                 u2i_out_cycle <= cycle_cnt;
                 u2i_out_captured <= 1'b1;
                 lat_uint2int_acc <= lat_uint2int_acc + (cycle_cnt - decode_out_cycle);
-                $display("DBG_LAT [%0t] u2i_out: delta=%0d acc=%0d",
+
+                // Throughput (Inter-departure)
+                if (block_count > 0) begin
+                    lat_thru_uint2int_acc <= lat_thru_uint2int_acc + (cycle_cnt - last_exit_u2i);
+                end
+                last_exit_u2i <= cycle_cnt;
+
+                $display("RTL DBG [%0t] u2i_out: delta=%0d acc=%0d",
                          $time, cycle_cnt - decode_out_cycle, lat_uint2int_acc + (cycle_cnt - decode_out_cycle));
             end
 
@@ -299,11 +313,18 @@ module psedu_read_write (
             if (inv_done) begin
                 lat_invlift_acc <= lat_invlift_acc + (cycle_cnt - u2i_out_cycle);
                 block_count <= block_count + 32'd1;
+
+                // Throughput (Inter-departure)
+                if (block_count > 0) begin
+                    lat_thru_invlift_acc <= lat_thru_invlift_acc + (cycle_cnt - last_exit_inv);
+                end
+                last_exit_inv <= cycle_cnt;
+
                 // Reset per-block capture flags for next block
                 decode_out_captured  <= 1'b0;
                 u2i_out_captured     <= 1'b0;
                 block_input_captured <= 1'b0;
-                $display("DBG_LAT [%0t] inv_done: delta=%0d acc=%0d | block=%0d",
+                $display("RTL DBG [%0t] inv_done: delta=%0d acc=%0d | block=%0d",
                          $time, cycle_cnt - u2i_out_cycle, lat_invlift_acc + (cycle_cnt - u2i_out_cycle), block_count + 1);
             end
 
@@ -311,6 +332,12 @@ module psedu_read_write (
                 lat_decode_acc       <= '0;
                 lat_uint2int_acc     <= '0;
                 lat_invlift_acc      <= '0;
+                lat_thru_decode_acc   <= '0;
+                lat_thru_uint2int_acc <= '0;
+                lat_thru_invlift_acc  <= '0;
+                last_exit_decode     <= '0;
+                last_exit_u2i        <= '0;
+                last_exit_inv        <= '0;
                 block_start_cycle    <= '0;
                 decode_out_cycle     <= '0;
                 u2i_out_cycle        <= '0;
@@ -319,14 +346,17 @@ module psedu_read_write (
                 decode_out_captured  <= '0;
                 u2i_out_captured     <= '0;
                 block_input_captured <= '0;
-                $display("DBG_LAT [%0t] RESET accumulators (start_proc)", $time);
+                $display("RTL DBG [%0t] RESET accumulators (start_proc)", $time);
             end
         end
     end
 
-    assign lat_decode  = lat_decode_acc;
-    assign lat_uint2int = lat_uint2int_acc;
-    assign lat_invlift = lat_invlift_acc;
+    assign lat_decode    = lat_decode_acc;
+    assign lat_uint2int  = lat_uint2int_acc;
+    assign lat_invlift   = lat_invlift_acc;
+    assign lat_thru_decode   = lat_thru_decode_acc;
+    assign lat_thru_uint2int = lat_thru_uint2int_acc;
+    assign lat_thru_invlift  = lat_thru_invlift_acc;
 
 /*---------------------------------
 functions
