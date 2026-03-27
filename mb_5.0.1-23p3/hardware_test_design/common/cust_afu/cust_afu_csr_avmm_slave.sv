@@ -59,7 +59,16 @@ module cust_afu_csr_avmm_slave(
    // Per-stage ZFP latency inputs
    input logic [63:0] lat_decode_in,
    input logic [63:0] lat_uint2int_in,
-   input logic [63:0] lat_invlift_in
+   input logic [63:0] lat_invlift_in,
+   // Per-stage throughput (inter-departure) inputs
+   input logic [63:0] lat_thru_decode_in,
+   input logic [63:0] lat_thru_uint2int_in,
+   input logic [63:0] lat_thru_invlift_in,
+   input logic [63:0] block_count_in,
+   // Wall-clock busy time per stage
+   input logic [63:0] busy_decode_in,
+   input logic [63:0] busy_uint2int_in,
+   input logic [63:0] busy_invlift_in
 );
 
  // [harry] original version use 32-bit register, we only need to use 64-bit register
@@ -84,6 +93,15 @@ logic [63:0] addr_range_reg;    //96
 logic [63:0] lat_decode_reg;    //104 (0x68)
 logic [63:0] lat_uint2int_reg;  //112 (0x70)
 logic [63:0] lat_invlift_reg;   //120 (0x78)
+// Per-stage throughput registers
+logic [63:0] lat_thru_decode_reg;    //128 (0x80)
+logic [63:0] lat_thru_uint2int_reg;  //136 (0x88)
+logic [63:0] lat_thru_invlift_reg;   //144 (0x90)
+logic [63:0] block_count_reg;        //152 (0x98)
+// Wall-clock busy time registers
+logic [63:0] busy_decode_reg;        //160 (0xA0)
+logic [63:0] busy_uint2int_reg;      //168 (0xA8)
+logic [63:0] busy_invlift_reg;       //176 (0xB0)
 
 logic [63:0] mask ;
 logic config_access;
@@ -128,6 +146,15 @@ always @(posedge clk) begin
     lat_decode_reg <= lat_decode_in;
     lat_uint2int_reg <= lat_uint2int_in;
     lat_invlift_reg <= lat_invlift_in;
+    // Latch per-stage throughput
+    lat_thru_decode_reg <= lat_thru_decode_in;
+    lat_thru_uint2int_reg <= lat_thru_uint2int_in;
+    lat_thru_invlift_reg <= lat_thru_invlift_in;
+    block_count_reg <= block_count_in;
+    // Latch wall-clock busy times
+    busy_decode_reg <= busy_decode_in;
+    busy_uint2int_reg <= busy_uint2int_in;
+    busy_invlift_reg <= busy_invlift_in;
 end
 
 
@@ -231,6 +258,27 @@ always @(posedge clk) begin
         end
         else if (read && (address[21:0] == 22'h0078)) begin //read lat_invlift
             readdata <=  lat_invlift_reg & mask;
+        end
+        else if (read && (address[21:0] == 22'h0080)) begin //read lat_thru_decode
+            readdata <=  lat_thru_decode_reg & mask;
+        end
+        else if (read && (address[21:0] == 22'h0088)) begin //read lat_thru_uint2int
+            readdata <=  lat_thru_uint2int_reg & mask;
+        end
+        else if (read && (address[21:0] == 22'h0090)) begin //read lat_thru_invlift
+            readdata <=  lat_thru_invlift_reg & mask;
+        end
+        else if (read && (address[21:0] == 22'h0098)) begin //read block_count
+            readdata <=  block_count_reg & mask;
+        end
+        else if (read && (address[21:0] == 22'h00A0)) begin //read busy_decode
+            readdata <=  busy_decode_reg & mask;
+        end
+        else if (read && (address[21:0] == 22'h00A8)) begin //read busy_uint2int
+            readdata <=  busy_uint2int_reg & mask;
+        end
+        else if (read && (address[21:0] == 22'h00B0)) begin //read busy_invlift
+            readdata <=  busy_invlift_reg & mask;
         end
         else begin
            readdata  <= 64'h0;

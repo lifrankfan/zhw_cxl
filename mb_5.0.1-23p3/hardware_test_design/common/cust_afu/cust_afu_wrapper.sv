@@ -208,6 +208,15 @@ logic start_proc;
 logic [63:0] lat_decode_wire;
 logic [63:0] lat_uint2int_wire;
 logic [63:0] lat_invlift_wire;
+// Per-stage throughput wires
+logic [63:0] lat_thru_decode_wire;
+logic [63:0] lat_thru_uint2int_wire;
+logic [63:0] lat_thru_invlift_wire;
+logic [63:0] block_count_wire;
+// Wall-clock busy time wires
+logic [63:0] busy_decode_wire;
+logic [63:0] busy_uint2int_wire;
+logic [63:0] busy_invlift_wire;
 
 logic start_proc_cdc; //input to cdc
 logic [63:0] test_case_cdc;
@@ -244,7 +253,14 @@ cust_afu_csr_avmm_slave cust_afu_csr_avmm_slave_inst(
     .addr_range_out(addr_range_cdc),
     .lat_decode_in(lat_decode_wire),
     .lat_uint2int_in(lat_uint2int_wire),
-    .lat_invlift_in(lat_invlift_wire)
+    .lat_invlift_in(lat_invlift_wire),
+    .lat_thru_decode_in(lat_thru_decode_wire),
+    .lat_thru_uint2int_in(lat_thru_uint2int_wire),
+    .lat_thru_invlift_in(lat_thru_invlift_wire),
+    .block_count_in(block_count_wire),
+    .busy_decode_in(busy_decode_wire),
+    .busy_uint2int_in(busy_uint2int_wire),
+    .busy_invlift_in(busy_invlift_wire)
 );
 
 cdc_sync_flop #(.RESET_LEVEL(0), .WIDTH(64)) test_case_cdc_inst (
@@ -323,7 +339,14 @@ psedu_read_write psedu_read_write_inst(
     .awaddr(awaddr),
     .lat_decode(lat_decode_wire),
     .lat_uint2int(lat_uint2int_wire),
-    .lat_invlift(lat_invlift_wire)
+    .lat_invlift(lat_invlift_wire),
+    .lat_thru_decode(lat_thru_decode_wire),
+    .lat_thru_uint2int(lat_thru_uint2int_wire),
+    .lat_thru_invlift(lat_thru_invlift_wire),
+    .block_count_out(block_count_wire),
+    .busy_decode(busy_decode_wire),
+    .busy_uint2int(busy_uint2int_wire),
+    .busy_invlift(busy_invlift_wire)
 );
 
 cal_delay cal_delay_inst(

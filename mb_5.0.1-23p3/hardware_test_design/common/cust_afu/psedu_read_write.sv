@@ -74,7 +74,12 @@ module psedu_read_write (
     output logic [63:0] lat_invlift,
     output logic [63:0] lat_thru_decode,
     output logic [63:0] lat_thru_uint2int,
-    output logic [63:0] lat_thru_invlift
+    output logic [63:0] lat_thru_invlift,
+    output logic [63:0] block_count_out,
+    // (reserved for future use)
+    output logic [63:0] busy_decode,
+    output logic [63:0] busy_uint2int,
+    output logic [63:0] busy_invlift
 );
 
     enum logic [4:0] {
@@ -222,141 +227,224 @@ module psedu_read_write (
     // synthesis translate_on
 
     // ============================================================
-    // Latency Counter (multi-stage, per-block delta accumulation)
-    // Uses streaming handshakes as stage boundaries since the HLS
-    // done signals fire simultaneously for decode and u2i.
+    // Profiling Counters
+    //
+    // 1) First-block pipeline depth: measures transit latency of the
+    //    very first block through each stage (no overlap issues).
+    // 2) Inter-departure throughput: average cycles between consecutive
+    //    block outputs at each stage boundary (steady-state throughput).
+    // 3) Block count and overall cycle count.
     // ============================================================
     logic [63:0] cycle_cnt;
-    logic [63:0] lat_decode_acc;
-    logic [63:0] lat_uint2int_acc; 
-    logic [63:0] lat_invlift_acc;  
-
-    // Throughput Tracking (Inter-Departure Interval)
     logic [63:0] block_count;
-    logic [63:0] block_start_cycle;    // when input data first enters decode
-    logic [63:0] decode_out_cycle;     // first decode→u2i handshake per block
-    logic [63:0] u2i_out_cycle;        // first u2i→inv handshake per block
+
+    // First-block timestamps (captured once, never overwritten)
+    logic [63:0] first_input_cycle;
+    logic [63:0] first_decode_out_cycle;
+    logic [63:0] first_u2i_out_cycle;
+    logic [63:0] first_inv_out_cycle;
+    logic first_input_seen;
+    logic first_decode_out_seen;
+    logic first_u2i_out_seen;
+    logic first_inv_out_seen;
+
+    // First-block pipeline depth (latched once)
+    logic [63:0] lat_decode_first;     // first block: input → decode out
+    logic [63:0] lat_uint2int_first;   // first block: decode out → u2i out
+    logic [63:0] lat_invlift_first;    // first block: u2i out → inv out
+
+    // Inter-departure throughput accumulators
     logic [63:0] last_exit_decode;
     logic [63:0] last_exit_u2i;
     logic [63:0] last_exit_inv;
     logic [63:0] lat_thru_decode_acc;
     logic [63:0] lat_thru_uint2int_acc;
     logic [63:0] lat_thru_invlift_acc;
+    logic [63:0] decode_out_count;
+    logic [63:0] u2i_out_count;
 
-    // Edge detectors: capture only the FIRST handshake per block
-    logic decode_out_captured;         // set after first decode→u2i handshake
-    logic u2i_out_captured;            // set after first u2i→inv handshake
-    logic block_input_captured;        // set after first input handshake
+    // Per-block edge detectors for throughput counting
+    // These track the FIRST handshake per block at each stage
+    logic decode_out_captured;
+    logic u2i_out_captured;
 
     always_ff @(posedge axi4_mm_clk or negedge axi4_mm_rst_n) begin
         if (!axi4_mm_rst_n) begin
-            cycle_cnt           <= '0;
-            block_start_cycle   <= '0;
-            decode_out_cycle    <= '0;
-            u2i_out_cycle       <= '0;
-            lat_decode_acc      <= '0;
-            lat_uint2int_acc    <= '0;
-            lat_invlift_acc     <= '0;
-            lat_thru_decode_acc   <= '0;
-            lat_thru_uint2int_acc <= '0;
-            lat_thru_invlift_acc  <= '0;
-            last_exit_decode     <= '0;
-            last_exit_u2i        <= '0;
-            last_exit_inv        <= '0;
-            block_count         <= '0;
-            decode_out_captured <= '0;
-            u2i_out_captured    <= '0;
-            block_input_captured <= '0;
+            cycle_cnt              <= '0;
+            block_count            <= '0;
+            first_input_cycle      <= '0;
+            first_decode_out_cycle <= '0;
+            first_u2i_out_cycle    <= '0;
+            first_inv_out_cycle    <= '0;
+            first_input_seen       <= '0;
+            first_decode_out_seen  <= '0;
+            first_u2i_out_seen     <= '0;
+            first_inv_out_seen     <= '0;
+            lat_decode_first       <= '0;
+            lat_uint2int_first     <= '0;
+            lat_invlift_first      <= '0;
+            last_exit_decode       <= '0;
+            last_exit_u2i          <= '0;
+            last_exit_inv          <= '0;
+            lat_thru_decode_acc    <= '0;
+            lat_thru_uint2int_acc  <= '0;
+            lat_thru_invlift_acc   <= '0;
+            decode_out_count       <= '0;
+            u2i_out_count          <= '0;
+            decode_out_captured    <= '0;
+            u2i_out_captured       <= '0;
         end else begin
             cycle_cnt <= cycle_cnt + 64'd1;
 
-            // Capture block start: first input word accepted by decode
-            if (zfp_in_valid_real && zfp_in_ready && !block_input_captured) begin
-                block_start_cycle <= cycle_cnt;
-                block_input_captured <= 1'b1;
-                $display("DBG_LAT [%0t] block_input_start: cycle=%0d", $time, cycle_cnt);
+            // ---- First block: capture input timestamp ----
+            if (zfp_in_valid_real && zfp_in_ready && !first_input_seen) begin
+                first_input_cycle <= cycle_cnt;
+                first_input_seen  <= 1'b1;
+                $display("DBG_LAT [%0t] first_block_input: cycle=%0d", $time, cycle_cnt);
             end
 
-            // Stage boundary 1: first word out of decode → into u2i
+            // ---- Stage 1 boundary: decode → u2i ----
             if (decode_to_u2i_valid && decode_to_u2i_ready && !decode_out_captured) begin
-                decode_out_cycle <= cycle_cnt;
                 decode_out_captured <= 1'b1;
-                lat_decode_acc <= lat_decode_acc + (cycle_cnt - block_start_cycle);
-                
-                // Throughput (Inter-departure)
-                if (block_count > 0) begin
+                decode_out_count <= decode_out_count + 64'd1;
+
+                // First-block pipeline depth
+                if (!first_decode_out_seen) begin
+                    first_decode_out_cycle <= cycle_cnt;
+                    first_decode_out_seen  <= 1'b1;
+                    lat_decode_first <= cycle_cnt - first_input_cycle;
+                    $display("DBG_LAT [%0t] first_block_decode_out: cycle=%0d depth=%0d",
+                             $time, cycle_cnt, cycle_cnt - first_input_cycle);
+                end
+
+                // Throughput (inter-departure)
+                if (decode_out_count > 0) begin
                     lat_thru_decode_acc <= lat_thru_decode_acc + (cycle_cnt - last_exit_decode);
                 end
                 last_exit_decode <= cycle_cnt;
-
-                $display("RTL DBG [%0t] decode_out: delta=%0d acc=%0d",
-                         $time, cycle_cnt - block_start_cycle, lat_decode_acc + (cycle_cnt - block_start_cycle));
             end
 
-            // Stage boundary 2: first word out of u2i → into inv_lift
+            // ---- Stage 2 boundary: u2i → inv_lift ----
             if (u2i_to_inv_valid && u2i_to_inv_ready && !u2i_out_captured) begin
-                u2i_out_cycle <= cycle_cnt;
                 u2i_out_captured <= 1'b1;
-                lat_uint2int_acc <= lat_uint2int_acc + (cycle_cnt - decode_out_cycle);
+                u2i_out_count <= u2i_out_count + 64'd1;
 
-                // Throughput (Inter-departure)
-                if (block_count > 0) begin
+                // First-block pipeline depth
+                if (!first_u2i_out_seen) begin
+                    first_u2i_out_cycle <= cycle_cnt;
+                    first_u2i_out_seen  <= 1'b1;
+                    lat_uint2int_first <= cycle_cnt - first_decode_out_cycle;
+                    $display("DBG_LAT [%0t] first_block_u2i_out: cycle=%0d depth=%0d",
+                             $time, cycle_cnt, cycle_cnt - first_decode_out_cycle);
+                end
+
+                // Throughput (inter-departure)
+                if (u2i_out_count > 0) begin
                     lat_thru_uint2int_acc <= lat_thru_uint2int_acc + (cycle_cnt - last_exit_u2i);
                 end
                 last_exit_u2i <= cycle_cnt;
 
-                $display("RTL DBG [%0t] u2i_out: delta=%0d acc=%0d",
-                         $time, cycle_cnt - decode_out_cycle, lat_uint2int_acc + (cycle_cnt - decode_out_cycle));
+                // Release decode capture for next block
+                decode_out_captured <= 1'b0;
             end
 
-            // Stage 3 completion: inv_done fires once per block
+            // ---- Stage 3 completion: inv_done ----
             if (inv_done) begin
-                lat_invlift_acc <= lat_invlift_acc + (cycle_cnt - u2i_out_cycle);
-                block_count <= block_count + 32'd1;
+                block_count <= block_count + 64'd1;
 
-                // Throughput (Inter-departure)
+                // First-block pipeline depth
+                if (!first_inv_out_seen) begin
+                    first_inv_out_cycle <= cycle_cnt;
+                    first_inv_out_seen  <= 1'b1;
+                    lat_invlift_first <= cycle_cnt - first_u2i_out_cycle;
+                    $display("DBG_LAT [%0t] first_block_inv_done: cycle=%0d depth=%0d",
+                             $time, cycle_cnt, cycle_cnt - first_u2i_out_cycle);
+                end
+
+                // Throughput (inter-departure)
                 if (block_count > 0) begin
                     lat_thru_invlift_acc <= lat_thru_invlift_acc + (cycle_cnt - last_exit_inv);
                 end
                 last_exit_inv <= cycle_cnt;
 
-                // Reset per-block capture flags for next block
-                decode_out_captured  <= 1'b0;
-                u2i_out_captured     <= 1'b0;
-                block_input_captured <= 1'b0;
-                $display("RTL DBG [%0t] inv_done: delta=%0d acc=%0d | block=%0d",
-                         $time, cycle_cnt - u2i_out_cycle, lat_invlift_acc + (cycle_cnt - u2i_out_cycle), block_count + 1);
+                // Release u2i capture for next block
+                u2i_out_captured <= 1'b0;
+
+                $display("RTL DBG [%0t] inv_done: block=%0d", $time, block_count + 1);
             end
 
+            // Reset on start
             if (start_proc && test_case == 64'd20) begin
-                lat_decode_acc       <= '0;
-                lat_uint2int_acc     <= '0;
-                lat_invlift_acc      <= '0;
-                lat_thru_decode_acc   <= '0;
-                lat_thru_uint2int_acc <= '0;
-                lat_thru_invlift_acc  <= '0;
-                last_exit_decode     <= '0;
-                last_exit_u2i        <= '0;
-                last_exit_inv        <= '0;
-                block_start_cycle    <= '0;
-                decode_out_cycle     <= '0;
-                u2i_out_cycle        <= '0;
-                cycle_cnt            <= '0;
-                block_count          <= '0;
-                decode_out_captured  <= '0;
-                u2i_out_captured     <= '0;
-                block_input_captured <= '0;
-                $display("RTL DBG [%0t] RESET accumulators (start_proc)", $time);
+                cycle_cnt              <= '0;
+                block_count            <= '0;
+                first_input_cycle      <= '0;
+                first_decode_out_cycle <= '0;
+                first_u2i_out_cycle    <= '0;
+                first_inv_out_cycle    <= '0;
+                first_input_seen       <= '0;
+                first_decode_out_seen  <= '0;
+                first_u2i_out_seen     <= '0;
+                first_inv_out_seen     <= '0;
+                lat_decode_first       <= '0;
+                lat_uint2int_first     <= '0;
+                lat_invlift_first      <= '0;
+                last_exit_decode       <= '0;
+                last_exit_u2i          <= '0;
+                last_exit_inv          <= '0;
+                lat_thru_decode_acc    <= '0;
+                lat_thru_uint2int_acc  <= '0;
+                lat_thru_invlift_acc   <= '0;
+                decode_out_count       <= '0;
+                u2i_out_count          <= '0;
+                decode_out_captured    <= '0;
+                u2i_out_captured       <= '0;
+                $display("RTL DBG [%0t] RESET profiling (start_proc)", $time);
             end
         end
     end
 
-    assign lat_decode    = lat_decode_acc;
-    assign lat_uint2int  = lat_uint2int_acc;
-    assign lat_invlift   = lat_invlift_acc;
+    assign lat_decode    = lat_decode_first;
+    assign lat_uint2int  = lat_uint2int_first;
+    assign lat_invlift   = lat_invlift_first;
     assign lat_thru_decode   = lat_thru_decode_acc;
     assign lat_thru_uint2int = lat_thru_uint2int_acc;
     assign lat_thru_invlift  = lat_thru_invlift_acc;
+    assign block_count_out   = block_count;
+
+    // ============================================================
+    // Wall-Clock Busy Time Per Stage
+    // Counts cycles where each stage's output valid & ready are
+    // both high (i.e., the stage is actively transferring data).
+    // These values will always be <= overall AXI cycle count.
+    // ============================================================
+    logic [63:0] busy_decode_acc;
+    logic [63:0] busy_uint2int_acc;
+    logic [63:0] busy_invlift_acc;
+
+    always_ff @(posedge axi4_mm_clk or negedge axi4_mm_rst_n) begin
+        if (!axi4_mm_rst_n) begin
+            busy_decode_acc   <= '0;
+            busy_uint2int_acc <= '0;
+            busy_invlift_acc  <= '0;
+        end else begin
+            if (start_proc && test_case == 64'd20) begin
+                busy_decode_acc   <= '0;
+                busy_uint2int_acc <= '0;
+                busy_invlift_acc  <= '0;
+            end else begin
+                if (decode_to_u2i_valid && decode_to_u2i_ready)
+                    busy_decode_acc <= busy_decode_acc + 64'd1;
+                if (u2i_to_inv_valid && u2i_to_inv_ready)
+                    busy_uint2int_acc <= busy_uint2int_acc + 64'd1;
+                if (zfp_out_valid && zfp_out_ready)
+                    busy_invlift_acc <= busy_invlift_acc + 64'd1;
+            end
+        end
+    end
+
+    assign busy_decode   = busy_decode_acc;
+    assign busy_uint2int = busy_uint2int_acc;
+    assign busy_invlift  = busy_invlift_acc;
 
 /*---------------------------------
 functions

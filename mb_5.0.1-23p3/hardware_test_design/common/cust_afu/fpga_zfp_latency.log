@@ -4,23 +4,26 @@
 #   Dimension:     128
 #   Blocks:        3200
 #   Bits/value:    8
+#   FPGA Clock:    400 MHz
 # ============================================
 # 
-# Total accumulated cycles:
-#   Overall (AXI):      131917 cycles
-#   Decode Stage:       1434204 cycles
-#   Uint-to-Int Stage:  125135 cycles
-#   Inv Lift Stage:     125410 cycles
+# Overall:
+#   Total AXI cycles:  131917
+#   Throughput:         41 cycles/block
 # 
-# Pipeline Performance (cycles):
-#   Overall Throughput: ( 131917 total AXI cycles / 3200 blocks ) = 41 cycles/block
-# --------------------------------------------
-# Algorithm Processing Time per Block:
-#   Decode Stage:       41 cycles (32 bitplanes processing + 9 loop overhead)
-#   Negabinary->signed: 1 cycle (Combinatorial integer math)
-#   Int->float cast:    6 cycles (4-stage butterfly + 2-stage exponent)
-# Physical Pipeline Depth (Hardware Latency):
-#   Decode Stage:       448 hardware stages (avg transit time)
-#   U2I Stage:          39 hardware stages
-#   Cast Stage:         39 hardware stages
-# --------------------------------------------
+# First-Block Pipeline Depth (per-stage processing latency):
+#   Decode:             91 cycles
+#   Negabinary->signed: 4 cycles
+#   Int->float cast:    39 cycles
+#   Total pipeline:     134 cycles
+# 
+# Per-Stage Throughput (inter-departure, steady-state):
+#   Decode:             41 cycles/block
+#   Negabinary->signed: 41 cycles/block
+#   Int->float cast:    41 cycles/block
+# ============================================
+# PASS: Latency Recorded (3200 blocks processed)
+# ** Note: $finish    : cust_afu_tb.sv(293)
+#    Time: 1323645 ns  Iteration: 1  Instance: /cust_afu_tb
+# End time: 23:38:06 on Mar 26,2026, Elapsed time: 0:00:13
+# Errors: 0, Warnings: 623, Suppressed Warnings: 159

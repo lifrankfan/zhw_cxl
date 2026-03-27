@@ -200,32 +200,30 @@ module cust_afu_tb;
     initial begin
         logic [63:0] lat_s1, lat_s2, lat_s3;
         logic [63:0] thru_s1, thru_s2, thru_s3;
-        logic [31:0] blk_cnt;
+        logic [63:0] blk_cnt_csr;
         rst_n = 0;
         // Reset
         rst_n = 1'b0;
         #2000;
         rst_n = 1'b1;
-        // Force unconnected call data port in monolithic fp32 IP
-        // force dut.psedu_read_write_inst.zfp_f32_inst.zfp_1d_decompress_f32_internal_inst.zfp_1d_decompress_f32_internal.avst_iord_bl_call_zfp_1d_decompress_f32_data = 1'b0;
         #2000;
-        
+
         $display("--- Starting ZFP Per-Stage Latency Test ---");
-        
+
         // 1. Configure Test Case 20 (ZFP)
         csr_wr(22'h0018, 64'd20); // CSR_TEST_CASE
-        
+
         // 2. Configure Num Requests
-        // Running NUM_CACHELINES cachelines (NUM_VECTORS vectors × 8 cachelines each)
+        // Running NUM_CACHELINES cachelines (NUM_VECTORS vectors x 8 cachelines each)
         csr_wr(22'h0058, NUM_CACHELINES);
         // 3. Configure Dst Addr
         csr_wr(22'h0050, 64'hB0000000); // CSR_DST (mapped to seed_init)
-        
+
         // 4. Start (Write Src Addr)
         csr_wr(22'h0008, 64'hA0000000); // CSR_SRC -> Triggers Start
-        
+
         $display("--- ZFP Process Started ---");
-        
+
         // Wait for Completion by polling the state machine directly
         begin
             int timeout;
@@ -240,63 +238,58 @@ module cust_afu_tb;
                 $display("TB ERROR: Process timed out unconditionally!");
             end
         end
-        
+
         // Read Overall Latency
-        csr_rd(22'h0010, lat); // Read final latency again just to be safe
-        
-        // Read Per-Stage Latencies
-        csr_rd(22'h0068, lat_s1); // Decode (bit-plane)
+        csr_rd(22'h0010, lat);
+
+        // Read Per-Stage Pipeline Depth (first-block transit latency)
+        csr_rd(22'h0068, lat_s1); // Decode
         csr_rd(22'h0070, lat_s2); // Uint-to-Int
         csr_rd(22'h0078, lat_s3); // Inv Lift
 
-        // Read block count from RTL
-        // Read block count and throughput from RTL internal registers
-        blk_cnt = dut.psedu_read_write_inst.block_count;
-        thru_s1 = dut.psedu_read_write_inst.lat_thru_decode_acc;
-        thru_s2 = dut.psedu_read_write_inst.lat_thru_uint2int_acc;
-        thru_s3 = dut.psedu_read_write_inst.lat_thru_invlift_acc;
+        // Read Per-Stage Throughput (inter-departure intervals) via CSR
+        csr_rd(22'h0080, thru_s1); // Decode throughput
+        csr_rd(22'h0088, thru_s2); // U2I throughput
+        csr_rd(22'h0090, thru_s3); // InvLift throughput
+        csr_rd(22'h0098, blk_cnt_csr); // Block count
 
         $display("");
-        $display("============================================");
-        $display("  ZFP FPGA Decompression Latency Report (SIFT)");
-        $display("============================================");
-        $display("  Vectors:       %0d", NUM_VECTORS);
-        $display("  Dimension:     128");
-        $display("  Blocks:        %0d", blk_cnt);
-        $display("  Bits/value:    8");
-        $display("============================================");
-        $display("");
-        $display("Total accumulated cycles:");
-        $display("  Overall (AXI):      %0d cycles", lat);
-        $display("  Decode Stage:       %0d cycles", lat_s1);
-        $display("  Uint-to-Int Stage:  %0d cycles", lat_s2);
-        $display("  Inv Lift Stage:     %0d cycles", lat_s3);
-        $display("");
-        if (blk_cnt > 0) begin
-            $display("Pipeline Performance (cycles):");
-            $display("  Overall Throughput: ( %0d total AXI cycles / %0d blocks ) = %0d cycles/block", lat, blk_cnt, lat / blk_cnt);
-            $display("--------------------------------------------");
-            $display("Algorithm Processing Time per Block:");
-            $display("  Decode Stage:       41 cycles (32 bitplanes processing + 9 loop overhead)");
-            $display("  Negabinary->signed: 1 cycle (Combinatorial integer math)");
-            $display("  Int->float cast:    6 cycles (4-stage butterfly + 2-stage exponent)");
-            $display("Physical Pipeline Depth (Hardware Latency):");
-            $display("  Decode Stage:       %0d hardware stages (avg transit time)", lat_s1 / blk_cnt);
-            $display("  U2I Stage:          %0d hardware stages", lat_s2 / blk_cnt);
-            $display("  Cast Stage:         %0d hardware stages", lat_s3 / blk_cnt);
-            $display("--------------------------------------------");
-            $display("Dynamic Throughput (Cycles Per Block):");
-            $display("  Decode Stage:       %0d cycles/block", thru_s1 / (blk_cnt-1));
-            $display("  U2I Stage:          %0d cycles/block", thru_s2 / (blk_cnt-1));
-            $display("  Cast Stage:         %0d cycles/block", thru_s3 / (blk_cnt-1));
+        $display("#   ZFP FPGA Decompression Latency Report (SIFT)");
+        $display("# ============================================");
+        $display("#   Vectors:       %0d", NUM_VECTORS);
+        $display("#   Dimension:     128");
+        $display("#   Blocks:        %0d", blk_cnt_csr);
+        $display("#   Bits/value:    8");
+        $display("#   FPGA Clock:    400 MHz");
+        $display("# ============================================");
+        $display("# ");
+        if (blk_cnt_csr > 0) begin
+            $display("# Overall:");
+            $display("#   Total AXI cycles:  %0d", lat);
+            $display("#   Throughput:         %0d cycles/block", lat / blk_cnt_csr);
+            $display("# ");
+            $display("# First-Block Pipeline Depth (per-stage processing latency):");
+            $display("#   Decode:             %0d cycles", lat_s1);
+            $display("#   Negabinary->signed: %0d cycles", lat_s2);
+            $display("#   Int->float cast:    %0d cycles", lat_s3);
+            $display("#   Total pipeline:     %0d cycles", lat_s1 + lat_s2 + lat_s3);
+            $display("# ");
+            $display("# Per-Stage Throughput (inter-departure, steady-state):");
+            if (blk_cnt_csr > 1) begin
+                $display("#   Decode:             %0d cycles/block", thru_s1 / (blk_cnt_csr - 1));
+                $display("#   Negabinary->signed: %0d cycles/block", thru_s2 / (blk_cnt_csr - 1));
+                $display("#   Int->float cast:    %0d cycles/block", thru_s3 / (blk_cnt_csr - 1));
+            end else begin
+                $display("#   (need > 1 block for throughput measurement)");
+            end
         end
-        $display("============================================");
-        
-        if (lat > 0 && blk_cnt > 0) 
-            $display("PASS: Latency Recorded (%0d blocks processed)", blk_cnt);
-        else 
+        $display("# ============================================");
+
+        if (lat > 0 && blk_cnt_csr > 0)
+            $display("PASS: Latency Recorded (%0d blocks processed)", blk_cnt_csr);
+        else
             $display("FAIL: Latency is 0 or no blocks processed");
-            
+
         $finish;
     end
 

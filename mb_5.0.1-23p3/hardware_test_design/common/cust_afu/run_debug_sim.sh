@@ -47,7 +47,7 @@ vsim -c -L zfp_decode_lib -L zfp_u2i_lib -L zfp_inv_lift_lib -L altera_mf_ver -L
 echo "--- Checking DBG ---"
 grep "DBG_LAT" debug_sim.log | tail -20
 echo "--- Extracting Latency Report ---"
-grep -A 25 "ZFP FPGA Decompression Latency Report" debug_sim.log | tee fpga_zfp_latency.log
+grep -A 40 "ZFP FPGA Decompression Latency Report" debug_sim.log | tee fpga_zfp_latency.log
 echo ""
 echo "--- Results saved to fpga_zfp_latency.log ---"
 echo "--- Done ---"
