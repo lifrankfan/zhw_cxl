@@ -1,0 +1,17 @@
+# Questa/ModelSim artifacts
+work/
+libraries/
+*.wlf
+*.vstf
+transcript
+modelsim.ini
+
+# Simulation output (regenerated each run)
+debug_sim.log
+sim_run.log
+zfp_output.hex
+output/
+
+# Editor/IDE
+*.swp
+*~

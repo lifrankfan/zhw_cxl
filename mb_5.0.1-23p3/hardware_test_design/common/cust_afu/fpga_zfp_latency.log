@@ -1,29 +1,29 @@
-#   ZFP FPGA Decompression Latency Report (SIFT)
-# ============================================
-#   Vectors:       100
-#   Dimension:     128
-#   Blocks:        3200
-#   Bits/value:    8
-#   FPGA Clock:    400 MHz
-# ============================================
-# 
-# Overall:
-#   Total AXI cycles:  131917
-#   Throughput:         41 cycles/block
-# 
-# First-Block Pipeline Depth (per-stage processing latency):
-#   Decode:             91 cycles
-#   Negabinary->signed: 4 cycles
-#   Int->float cast:    39 cycles
-#   Total pipeline:     134 cycles
-# 
-# Per-Stage Throughput (inter-departure, steady-state):
-#   Decode:             41 cycles/block
-#   Negabinary->signed: 41 cycles/block
-#   Int->float cast:    41 cycles/block
-# ============================================
-# PASS: Latency Recorded (3200 blocks processed)
-# ** Note: $finish    : cust_afu_tb.sv(293)
-#    Time: 1323645 ns  Iteration: 1  Instance: /cust_afu_tb
-# End time: 23:38:06 on Mar 26,2026, Elapsed time: 0:00:13
-# Errors: 0, Warnings: 623, Suppressed Warnings: 159
+ZFP FPGA Decompression Latency Report (SIFT)
+============================================
+Vectors:       100
+Dimension:     128
+Blocks:        801
+Bits/value:    8
+FPGA Clock:    400 MHz
+============================================
+
+Overall:
+Total AXI cycles:  21969
+Throughput:         27 cycles/block
+
+First-Block Pipeline Depth (per-stage processing latency):
+Decode:             28 cycles
+Negabinary->signed: 14 cycles
+Int->float cast:    18 cycles
+Total pipeline:     60 cycles
+
+Per-Stage Throughput (inter-departure, steady-state):
+Decode:             27 cycles/block
+Negabinary->signed: 27 cycles/block
+Int->float cast:    27 cycles/block
+============================================
+PASS: Latency Recorded (801 blocks processed)
+** Note: $finish    : /fast-lab-share/lifan3/zfp/mb_5.0.1-23p3/hardware_test_design/common/cust_afu/cust_afu_tb.sv(299)
+Time: 224145 ns  Iteration: 1  Instance: /cust_afu_tb
+End time: 14:48:27 on Mar 29,2026, Elapsed time: 0:00:02
+Errors: 0, Warnings: 0

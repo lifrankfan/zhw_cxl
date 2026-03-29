@@ -84,8 +84,10 @@ module cust_afu_tb;
     // Load golden data from file
     logic [7:0] mem_data [0:131071]; // 128KB buffer for multi-vector data
     initial begin
-        integer fd, code;
-        fd = $fopen("/fast-lab-share/lifan3/zfp/mb_5.0.1-23p3/hardware_test_design/common/cust_afu/test_data_sift/sift_compressed_multi.zfp", "rb");
+        integer fd, code, i;
+        // Zero-initialize entire array so reads beyond file data return 0 instead of X
+        for (i = 0; i < 131072; i++) mem_data[i] = 8'h00;
+        fd = $fopen("/fast-lab-share/lifan3/zfp/mb_5.0.1-23p3/hardware_test_design/common/cust_afu/test_data_sift/sift_compressed_2d.zfp", "rb");
         if (fd == 0) begin
             $display("ERROR: Could not open golden data file!");
             $finish;
@@ -136,6 +138,10 @@ module cust_afu_tb;
                             
                         rid <= arid;
                         rlast <= 1;
+                        if (offset < 128)
+                          $display("MEM_RD [%0t] offset=%0d rdata[255:224]=0x%08x rdata[31:0]=0x%08x rdata[287:256]=0x%08x mem[28]=0x%02x mem[29]=0x%02x mem[30]=0x%02x mem[31]=0x%02x",
+                            $time, offset, rdata[255:224], rdata[31:0], rdata[287:256],
+                            mem_data[offset+28], mem_data[offset+29], mem_data[offset+30], mem_data[offset+31]);
                         wait(rready);
                         @(posedge clk);
                         rvalid_in <= 0;
